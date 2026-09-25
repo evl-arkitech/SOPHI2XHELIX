@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bdhppfjygs8id"]
+
+[ext_resource type="Script" uid="uid://jndguwmnvxq0" path="res://scripts/city_echoes_game.gd" id="1_game"]
+[ext_resource type="Script" uid="uid://fffumb2f1fdv" path="res://scripts/sophi_sheaf_engine.gd" id="2_sheaf"]
+[ext_resource type="PackedScene" path="res://scenes/tactical_residence.tscn" id="3_residence"]
+[ext_resource type="PackedScene" path="res://scenes/tactical_cctv_monitor.tscn" id="4_cctv"]
+
+[node name="CityEchoesGame" type="Node3D" unique_id=1445795025]
+script = ExtResource("1_game")
+
+[node name="SOPHISheafEngine" type="Node" parent="." unique_id=1314023910]
+script = ExtResource("2_sheaf")
+
+[node name="TacticalResidence" parent="." unique_id=2088776048 instance=ExtResource("3_residence")]
+
+[node name="CCTVMonitorTerminal" parent="." unique_id=1790239738 instance=ExtResource("4_cctv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0.95, 5)
+
+[node name="CCTVGreenGlow" type="OmniLight3D" parent="." unique_id=361049724]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 1.05, 5.2)
+light_color = Color(0.2, 0.9, 0.45, 1)
+light_energy = 0.85
+omni_range = 3.2
+
+[node name="NocturnalMoonlight" type="DirectionalLight3D" parent="." unique_id=267216469]
+transform = Transform3D(0.642788, -0.383022, 0.663414, 0, 0.866025, 0.5, -0.766044, -0.321394, 0.55667, 0, 12, 0)
+light_color = Color(0.6, 0.74, 0.98, 1)
+light_energy = 1.1
+shadow_enabled = true
+shadow_bias = 0.03

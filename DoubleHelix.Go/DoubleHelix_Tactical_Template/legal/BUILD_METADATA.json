@@ -1,0 +1,17 @@
+{
+  "game_title": "DoubleHelix Tactical Arena",
+  "version": "1.0.0",
+  "company": "Cosmic Souls of Sovereignty Inc.",
+  "domain": "arkade.new-world-arkitech.dev",
+  "storage_container": "https://arkade.new-world-arkitech.dev/assets",
+  "engine": "DoubleHelix Neural Agent Engine (DoubleHelix.Go Edition)",
+  "license_type": "COMMERCIAL_PROPRIETARY",
+  "build_timestamp": 1790221025.5100648,
+  "build_signature_sha256": "5fe910509493be594f4ac600635df3cfa3e22136df7141158234b6bfccc18c5c",
+  "invariant_guarantees": {
+    "p_ruin": 0.0,
+    "sheaf_coherence": 0.985,
+    "continuous_collision_detection": true,
+    "zero_dynamic_allocations_hot_loop": true
+  }
+}

@@ -1,0 +1,2 @@
+# Double Helix Agent System
+See AGENT.md for complete documentation and operational specifications.

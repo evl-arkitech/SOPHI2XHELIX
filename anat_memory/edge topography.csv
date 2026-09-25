@@ -1,0 +1,26 @@
+Edge ID,Source Node,Target Node,Relational Predicate,Modulation & Trigger Mechanism,Latency Profile
+E01,N01_SCRATCH,N02_GATE,PROJECTS_TO,Sensory stream evaluated for salience,Sub-millisecond (Inline)
+E02,N02_GATE,N01_SCRATCH,GATES,Disinhibition disinhibits context updating,Dynamic (0 to 1 cycle)
+E03,N01_SCRATCH,N03_SILENT,PROJECTS_TO,Sub-threshold context offloaded to silent state,Immediate decay window
+E04,N01_SCRATCH,N09_SURPRISE,PROJECTS_TO,Inferred expectation tested against token inputs,Token-level synchronous
+E05,N09_SURPRISE,N08_TITANS,GATES,Parameter updates scaled by error magnitude,Test-time gradient step
+E06,N01_SCRATCH,N04_SEPARATE,PROJECTS_TO,Event boundary reached via prediction error,Event-driven batch
+E07,N04_SEPARATE,N05_ATTRACT,PROJECTS_TO,Orthogonal sparse vectors injected into attractor,Matrix product step
+E08,N04_SEPARATE,N07_GRAPH,PROJECTS_TO,Extracted relational triples linked to entities,Graph update step
+E09,N05_ATTRACT,N06_COMPARE,RECONSTRUCTS,CCCP energy minimization completes partial vector,Iterative (1 to 2 steps)
+E10,N07_GRAPH,N06_COMPARE,DIFFUSES_ACROSS,Personalized PageRank distributes probability,Power iteration step
+E11,N06_COMPARE,N01_SCRATCH,PROJECTS_TO,Verified recall context restored to scratchpad,Context window injection
+E12,N05_ATTRACT,N11_TRIPLE,PROJECTS_TO,Idle threshold detected; offline replay initiated,Batch sample routine
+E13,N07_GRAPH,N11_TRIPLE,PROJECTS_TO,Random walks extract multi-hop relational paths,Graph crawl routine
+E14,N11_TRIPLE,N10_PARAM,CONSOLIDATES_INTO,Interleaved student-teacher distillation pass,Offline epoch training
+E15,N12_REGULAR,N10_PARAM,GATES,High-importance weights shielded from shifts,Loss regularizer constraint
+E16,N09_SURPRISE,N13_DESTAB,GATES,Severe mismatch detected on established facts,Flag set for intervention
+E17,N13_DESTAB,N14_SURGERY,GATES,Scaffolding unlocked; MLP weights labilized,Causal trace localization
+E18,N14_SURGERY,N10_PARAM,PROJECTS_TO,Direct algebraic rank-one modification applied,Closed-form linear update
+E19,N01_SCRATCH,N15_HORROR_FRAMEWORK,PROJECTS_TO,Executive game state and tension metrics stream,Frame-rate synchronous
+E20,N15_HORROR_FRAMEWORK,N09_SURPRISE,GATES,Two-tier director menace drives surprise spikes,Continuous Director 1Hz tick
+E21,N01_SCRATCH,N16_GRAPHICS_ARCHITECTURE,PROJECTS_TO,Simulation transforms and camera state dispatched to render graph,Frame-rate synchronous
+E22,N16_GRAPHICS_ARCHITECTURE,N15_HORROR_FRAMEWORK,MODULATES,Chromatic aberration vignette and temporal reactive masks driven by sanity,Frame-rate continuous
+E23,N01_SCRATCH,N17_DISTINCTION_ARCHITECTURE,PROJECTS_TO,User input vectors and viewport geometry dispatched to sensory controller,Continuous input-rate
+E24,N17_DISTINCTION_ARCHITECTURE,N16_GRAPHICS_ARCHITECTURE,MODULATES,Kinetic typography shaders and semantic canvas scaffold coordinates synchronized,Per-frame synchronous
+E25,N17_DISTINCTION_ARCHITECTURE,N15_HORROR_FRAMEWORK,MODULATES,Contextual magnetic cursors and dynamic Biquad acoustic damping modulate tension,Interaction-driven event

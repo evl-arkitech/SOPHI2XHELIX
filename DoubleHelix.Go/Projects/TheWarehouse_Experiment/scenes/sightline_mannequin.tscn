@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/sightline_mannequin.gd" id="1_mann"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
+radius = 0.35
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bone"]
+albedo_color = Color(0.82, 0.8, 0.75, 1)
+roughness = 0.85
+metallic = 0.05
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_torso"]
+material = SubResource("StandardMaterial3D_bone")
+radius = 0.22
+height = 0.9
+
+[sub_resource type="SphereMesh" id="SphereMesh_head"]
+material = SubResource("StandardMaterial3D_bone")
+radius = 0.16
+height = 0.32
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_limb"]
+material = SubResource("StandardMaterial3D_bone")
+top_radius = 0.06
+bottom_radius = 0.05
+height = 0.8
+
+[node name="SightlineMannequin" type="CharacterBody3D" groups=["stalkers"]]
+collision_layer = 1
+collision_mask = 3
+script = ExtResource("1_mann")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_1")
+
+[node name="VisualMesh" type="Node3D" parent="."]
+
+[node name="Torso" type="MeshInstance3D" parent="VisualMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
+mesh = SubResource("CapsuleMesh_torso")
+
+[node name="HeadNode" type="Node3D" parent="VisualMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62, 0)
+
+[node name="HeadMesh" type="MeshInstance3D" parent="VisualMesh/HeadNode"]
+mesh = SubResource("SphereMesh_head")
+
+[node name="LeftArm" type="MeshInstance3D" parent="VisualMesh"]
+transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, -0.32, 1.1, 0)
+mesh = SubResource("CylinderMesh_limb")
+
+[node name="RightArm" type="MeshInstance3D" parent="VisualMesh"]
+transform = Transform3D(0.939693, -0.34202, 0, 0.34202, 0.939693, 0, 0, 0, 1, 0.32, 1.1, 0.1)
+mesh = SubResource("CylinderMesh_limb")
+
+[node name="LeftLeg" type="MeshInstance3D" parent="VisualMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14, 0.45, 0)
+mesh = SubResource("CylinderMesh_limb")
+
+[node name="RightLeg" type="MeshInstance3D" parent="VisualMesh"]
+transform = Transform3D(0.996195, 0, 0.0871557, 0, 1, 0, -0.0871557, 0, 0.996195, 0.14, 0.45, -0.05)
+mesh = SubResource("CylinderMesh_limb")
+
+[node name="StalkAudio" type="AudioStreamPlayer3D" parent="."]
+max_distance = 18.0
+bus = &"Master"

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Echoes - Tactical Audio Console & Soundboard</title>
+    <!-- Offline Base64 Audio Bundle -->
+    <script src="sound_bundle.js"></script>
+    <script src="assets/audio/sound_bundle.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background: #06080c;
+            color: #f1f5f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 30px 40px;
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid rgba(245, 158, 11, 0.3);
+            padding-bottom: 18px;
+            margin-bottom: 28px;
+        }
+
+        h1 {
+            font-size: 24px;
+            letter-spacing: 4px;
+            color: #f59e0b;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: #94a3b8;
+            margin-top: 4px;
+            font-family: monospace;
+        }
+
+        .stats-badge {
+            background: rgba(245, 158, 11, 0.12);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            padding: 8px 16px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 12px;
+            color: #f59e0b;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 22px;
+        }
+
+        .category-card {
+            background: rgba(15, 20, 28, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            padding: 18px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding-bottom: 8px;
+        }
+
+        .category-title {
+            font-size: 13px;
+            letter-spacing: 2px;
+            font-weight: bold;
+            color: #e2e8f0;
+            text-transform: uppercase;
+        }
+
+        .clip-count {
+            font-size: 11px;
+            font-family: monospace;
+            color: #64748b;
+        }
+
+        .sound-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .sound-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            color: #cbd5e1;
+            padding: 9px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            font-family: monospace;
+            transition: all 0.15s ease;
+        }
+
+        .sound-btn:hover {
+            background: rgba(245, 158, 11, 0.15);
+            border-color: rgba(245, 158, 11, 0.5);
+            color: #fff;
+            transform: translateX(3px);
+        }
+
+        .sound-btn.playing {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: #10b981;
+            color: #10b981;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+        }
+
+        .play-icon {
+            font-size: 10px;
+            color: #94a3b8;
+        }
+
+        .sound-btn:hover .play-icon { color: #f59e0b; }
+        .sound-btn.playing .play-icon { color: #10b981; }
+
+        /* Master Playback Bar */
+        #now-playing {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(8, 10, 14, 0.96);
+            border-top: 1px solid rgba(245, 158, 11, 0.4);
+            padding: 14px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            font-family: monospace;
+            font-size: 12px;
+        }
+
+        .active-track {
+            color: #f59e0b;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>
+        <h1>TACTICAL AUDIO CONSOLE</h1>
+        <div class="subtitle">SLICED EPIDEMIC SOUND FOLEY & SFX // 48,000 HZ 24-BIT PCM WAV</div>
+    </div>
+    <div style="display: flex; gap: 12px; align-items: center;">
+        <a href="TitleScreen.html" style="color: #94a3b8; text-decoration: none; font-family: monospace; font-size: 12px; padding: 8px 14px; border: 1px solid rgba(255,255,255,0.15); border-radius: 3px; transition: 0.2s;">&larr; TITLE SCREEN</a>
+        <a href="Simulator3D.html" style="color: #f59e0b; text-decoration: none; font-family: monospace; font-size: 12px; padding: 8px 14px; border: 1px solid rgba(245,158,11,0.5); background: rgba(245,158,11,0.1); border-radius: 3px; font-weight: bold; transition: 0.2s;">&#9654; 3D SIMULATOR</a>
+        <div class="stats-badge">
+            48 SLICED ASSETS READY FOR UNREAL ENGINE 5
+        </div>
+    </div>
+</header>
+
+<div class="grid-container">
+
+    <!-- Weapons: Shotgun -->
+    <div class="category-card">
+        <div class="category-header">
+            <span class="category-title">12-Gauge Shotgun Fire</span>
+            <span class="clip-count">3 Clipse</span>
+        </div>
+        <div class="sound-list">
+            <button class="sound-btn" onclick="playSound('assets/audio/weapons/shotgun_fire_01.wav', this)">
+                <span>shotgun_fire_01.wav</span>
+                <span class="play-icon">&#9654; 0.95s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/weapons/shotgun_fire_02.wav', this)">
+                <span>shotgun_fire_02.wav</span>
+                <span class="play-icon">&#9654; 0.95s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/weapons/shotgun_fire_03.wav', this)">
+                <span>shotgun_fire_03.wav</span>
+                <span class="play-icon">&#9654; 1.05s</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Weapons: Pistol 380 & Heavy -->
+    <div class="category-card">
+        <div class="category-header">
+            <span class="category-title">Pistols & Sidearms</span>
+            <span class="clip-count">7 Clips</span>
+        </div>
+        <div class="sound-list">
+            <button class="sound-btn" onclick="playSound('assets/audio/weapons/pistol_380_single_01.wav', this)">
+                <span>pistol_380_single_01.wav</span>
+                <span class="play-icon">&#9654; 0.85s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/weapons/pistol_380_double_tap.wav', this)">
+                <span>pistol_380_double_tap.wav</span>
+                <span class="play-icon">&#9654; 1.20s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/weapons/pistol_380_rapid_burst.wav', this)">
+                <span>pistol_380_rapid_burst.wav</span>
+                <span class="play-icon">&#9654; 4.20s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/weapons/pistol_heavy_bass_01.wav', this)">
+                <span>pistol_heavy_bass_01.wav</span>
+                <span class="play-icon">&#9654; 1.85s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/weapons/pistol_heavy_bass_02.wav', this)">
+                <span>pistol_heavy_bass_02.wav</span>
+                <span class="play-icon">&#9654; 1.95s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/weapons/pistol_heavy_bass_03.wav', this)">
+                <span>pistol_heavy_bass_03.wav</span>
+                <span class="play-icon">&#9654; 2.10s</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footsteps: Wood Decking (Porch & Deck) -->
+    <div class="category-card">
+        <div class="category-header">
+            <span class="category-title">Wood Decking (Boots)</span>
+            <span class="clip-count">4 Clips</span>
+        </div>
+        <div class="sound-list">
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/wood_deck/boot_wood_deck_01.wav', this)">
+                <span>boot_wood_deck_01.wav</span>
+                <span class="play-icon">&#9654; 0.65s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/wood_deck/boot_wood_deck_02.wav', this)">
+                <span>boot_wood_deck_02.wav</span>
+                <span class="play-icon">&#9654; 0.68s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/wood_deck/boot_wood_deck_03.wav', this)">
+                <span>boot_wood_deck_03.wav</span>
+                <span class="play-icon">&#9654; 0.70s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/wood_deck/boot_wood_deck_04.wav', this)">
+                <span>boot_wood_deck_04.wav</span>
+                <span class="play-icon">&#9654; 0.42s</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footsteps: Debris & Drywall Crunch -->
+    <div class="category-card">
+        <div class="category-header">
+            <span class="category-title">Debris & Plaster Crunch</span>
+            <span class="clip-count">6 Clips</span>
+        </div>
+        <div class="sound-list">
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/debris_crunch/debris_step_01.wav', this)">
+                <span>debris_step_01.wav</span>
+                <span class="play-icon">&#9654; 0.85s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/debris_crunch/debris_step_02.wav', this)">
+                <span>debris_step_02.wav</span>
+                <span class="play-icon">&#9654; 0.82s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/debris_crunch/debris_step_03.wav', this)">
+                <span>debris_step_03.wav</span>
+                <span class="play-icon">&#9654; 0.88s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/debris_crunch/debris_step_04.wav', this)">
+                <span>debris_step_04.wav</span>
+                <span class="play-icon">&#9654; 0.84s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/debris_crunch/debris_step_05.wav', this)">
+                <span>debris_step_05.wav</span>
+                <span class="play-icon">&#9654; 0.82s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/debris_crunch/debris_step_06.wav', this)">
+                <span>debris_step_06.wav</span>
+                <span class="play-icon">&#9654; 0.85s</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footsteps: Boots on Stairs -->
+    <div class="category-card">
+        <div class="category-header">
+            <span class="category-title">Boots on Stairs (Intruder)</span>
+            <span class="clip-count">8 Clips</span>
+        </div>
+        <div class="sound-list">
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/boots_stairs/boot_stair_01.wav', this)">
+                <span>boot_stair_01.wav</span>
+                <span class="play-icon">&#9654; 0.78s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/boots_stairs/boot_stair_02.wav', this)">
+                <span>boot_stair_02.wav</span>
+                <span class="play-icon">&#9654; 0.48s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/boots_stairs/boot_stair_03.wav', this)">
+                <span>boot_stair_03.wav</span>
+                <span class="play-icon">&#9654; 0.46s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/boots_stairs/boot_stair_04.wav', this)">
+                <span>boot_stair_04.wav</span>
+                <span class="play-icon">&#9654; 0.55s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/boots_stairs/boot_stair_05.wav', this)">
+                <span>boot_stair_05.wav</span>
+                <span class="play-icon">&#9654; 0.52s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/boots_stairs/boot_stair_06.wav', this)">
+                <span>boot_stair_06.wav</span>
+                <span class="play-icon">&#9654; 0.50s</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footsteps: Barefoot (Occupant Creeping) -->
+    <div class="category-card">
+        <div class="category-header">
+            <span class="category-title">Barefoot Stairs (Occupant)</span>
+            <span class="clip-count">8 Clips</span>
+        </div>
+        <div class="sound-list">
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/barefoot/barefoot_step_01.wav', this)">
+                <span>barefoot_step_01.wav</span>
+                <span class="play-icon">&#9654; 0.72s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/barefoot/barefoot_step_02.wav', this)">
+                <span>barefoot_step_02.wav</span>
+                <span class="play-icon">&#9654; 0.68s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/barefoot/barefoot_step_03.wav', this)">
+                <span>barefoot_step_03.wav</span>
+                <span class="play-icon">&#9654; 0.70s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/barefoot/barefoot_step_04.wav', this)">
+                <span>barefoot_step_04.wav</span>
+                <span class="play-icon">&#9654; 0.65s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/barefoot/barefoot_step_05.wav', this)">
+                <span>barefoot_step_05.wav</span>
+                <span class="play-icon">&#9654; 0.65s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/footsteps/barefoot/barefoot_step_06.wav', this)">
+                <span>barefoot_step_06.wav</span>
+                <span class="play-icon">&#9654; 0.65s</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Biometrics & Heartbeats -->
+    <div class="category-card">
+        <div class="category-header">
+            <span class="category-title">Biometrics & Heartbeat</span>
+            <span class="clip-count">7 Clips</span>
+        </div>
+        <div class="sound-list">
+            <button class="sound-btn" onclick="playSound('assets/audio/biometrics/heartbeat_deep_loop_01.wav', this)">
+                <span>heartbeat_deep_loop_01.wav</span>
+                <span class="play-icon">&#9654; 3.80s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/biometrics/heartbeat_irregular_panic_01.wav', this)">
+                <span>heartbeat_panic_01.wav</span>
+                <span class="play-icon">&#9654; 5.50s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/biometrics/heartbeat_irregular_exhaustion_03.wav', this)">
+                <span>heartbeat_exhaustion_03.wav</span>
+                <span class="play-icon">&#9654; 4.20s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/biometrics/breathing_slow_respiration_01.wav', this)">
+                <span>breathing_slow_respiration.wav</span>
+                <span class="play-icon">&#9654; 4.20s</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Impacts & Door Breaches -->
+    <div class="category-card">
+        <div class="category-header">
+            <span class="category-title">Door Breach & Metal Strikes</span>
+            <span class="clip-count">4 Clips</span>
+        </div>
+        <div class="sound-list">
+            <button class="sound-btn" onclick="playSound('assets/audio/impacts/door_heavy_breach_thud_01.wav', this)">
+                <span>door_heavy_breach_01.wav</span>
+                <span class="play-icon">&#9654; 2.40s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/impacts/door_heavy_breach_thud_02.wav', this)">
+                <span>door_heavy_breach_02.wav</span>
+                <span class="play-icon">&#9654; 2.20s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/impacts/breaker_metallic_strike.wav', this)">
+                <span>breaker_metallic_strike.wav</span>
+                <span class="play-icon">&#9654; 4.00s</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Tension & Stingers -->
+    <div class="category-card">
+        <div class="category-header">
+            <span class="category-title">Suspense Stingers & Risers</span>
+            <span class="clip-count">3 Clips</span>
+        </div>
+        <div class="sound-list">
+            <button class="sound-btn" onclick="playSound('assets/audio/stingers/bullet_time_whoosh_sub.wav', this)">
+                <span>bullet_time_whoosh_sub.wav</span>
+                <span class="play-icon">&#9654; 4.50s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/stingers/adrenaline_rush_tension_riser.wav', this)">
+                <span>adrenaline_rush_tension.wav</span>
+                <span class="play-icon">&#9654; 5.00s</span>
+            </button>
+            <button class="sound-btn" onclick="playSound('assets/audio/stingers/suspense_tail_impact.wav', this)">
+                <span>suspense_tail_impact.wav</span>
+                <span class="play-icon">&#9654; 3.00s</span>
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<div id="now-playing">
+    <div>CURRENT PLAYBACK: <span id="track-name" class="active-track">SELECT A SOUND ABOVE TO AUDITION</span></div>
+    <div>AUDIO FORMAT: 48.0 kHz // 24-BIT PCM STEREO</div>
+</div>
+
+<script>
+    let currentAudio = null;
+    let currentButton = null;
+
+    function getBundleAudio(filePath) {
+        if (!window.CITY_ECHOES_SOUNDS) return null;
+        const fn = filePath.toLowerCase();
+        for (const [key, b64List] of Object.entries(window.CITY_ECHOES_SOUNDS)) {
+            if (fn.includes('shotgun') && key === 'shotgun') return b64List[Math.floor(Math.random() * b64List.length)];
+            if ((fn.includes('pistol') || fn.includes('380')) && key === 'pistol') return b64List[Math.floor(Math.random() * b64List.length)];
+            if (fn.includes('debris') && key === 'debris_crunch') return b64List[Math.floor(Math.random() * b64List.length)];
+            if (fn.includes('stair') && key === 'boots') return b64List[Math.floor(Math.random() * b64List.length)];
+            if (fn.includes('barefoot') && key === 'barefoot') return b64List[Math.floor(Math.random() * b64List.length)];
+            if (fn.includes('wood_deck') && key === 'wood_deck') return b64List[Math.floor(Math.random() * b64List.length)];
+            if (fn.includes('door') && key === 'door_breach') return b64List[Math.floor(Math.random() * b64List.length)];
+            if (fn.includes('breaker') && key === 'breaker') return b64List[Math.floor(Math.random() * b64List.length)];
+        }
+        return null;
+    }
+
+    function playSound(filePath, btn) {
+        if (currentAudio) {
+            try { currentAudio.pause(); } catch(e){}
+            currentAudio.currentTime = 0;
+            if (currentButton) currentButton.classList.remove('playing');
+        }
+
+        const trackLabel = document.getElementById('track-name');
+        trackLabel.innerText = filePath.replace('assets/audio/', '');
+        currentButton = btn;
+        btn.classList.add('playing');
+
+        const bundleSrc = getBundleAudio(filePath);
+        currentAudio = new Audio(filePath);
+
+        currentAudio.play().catch(e => {
+            console.warn("Direct file playback failed, falling back to bundle:", e);
+            if (bundleSrc) {
+                currentAudio = new Audio(bundleSrc);
+                currentAudio.play().catch(err => console.error("Bundle audio play error:", err));
+                currentAudio.onended = () => {
+                    btn.classList.remove('playing');
+                    trackLabel.innerText = 'PLAYBACK FINISHED';
+                };
+            }
+        });
+
+        currentAudio.onended = () => {
+            btn.classList.remove('playing');
+            trackLabel.innerText = 'PLAYBACK FINISHED';
+        };
+    }
+</script>
+
+</body>
+</html>

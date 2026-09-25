@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://d1luj3cuuv353"]
+
+[ext_resource type="Script" uid="uid://qecbau8yyevw" path="res://addons/doublehelix_engine/doublehelix_dock.gd" id="1_dock_script"]
+
+[node name="DoubleHelix Suite" type="Control" unique_id=384906246]
+custom_minimum_size = Vector2(340, 560)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dock_script")

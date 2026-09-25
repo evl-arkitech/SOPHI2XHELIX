@@ -1,0 +1,199 @@
+[gd_scene format=3 uid="uid://cx6k8v2q9m11a"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_BedWalnut"]
+albedo_color = Color(0.25, 0.17, 0.12, 1)
+roughness = 0.45
+
+[sub_resource type="StandardMaterial3D" id="Mat_DuvetBlue"]
+albedo_color = Color(0.58, 0.69, 0.76, 1)
+roughness = 0.88
+
+[sub_resource type="StandardMaterial3D" id="Mat_ThrowCream"]
+albedo_color = Color(0.92, 0.89, 0.82, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Mat_PillowWhite"]
+albedo_color = Color(0.96, 0.95, 0.94, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="Mat_BrassHandle"]
+albedo_color = Color(0.85, 0.72, 0.35, 1)
+metallic = 0.9
+roughness = 0.25
+
+[sub_resource type="StandardMaterial3D" id="Mat_BedsideLampshade"]
+albedo_color = Color(0.96, 0.92, 0.82, 1)
+roughness = 0.75
+emission_enabled = true
+emission = Color(0.98, 0.88, 0.65, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="BoxMesh" id="Mesh_PlatformBedFrame"]
+material = SubResource("Mat_BedWalnut")
+size = Vector3(2.1, 0.22, 2.15)
+
+[sub_resource type="BoxMesh" id="Mesh_Headboard"]
+material = SubResource("Mat_BedWalnut")
+size = Vector3(2.1, 0.95, 0.08)
+
+[sub_resource type="BoxMesh" id="Mesh_MattressDuvet"]
+material = SubResource("Mat_DuvetBlue")
+size = Vector3(1.95, 0.32, 1.95)
+
+[sub_resource type="BoxMesh" id="Mesh_FoldedThrow"]
+material = SubResource("Mat_ThrowCream")
+size = Vector3(1.96, 0.04, 0.75)
+
+[sub_resource type="BoxMesh" id="Mesh_BedPillow"]
+material = SubResource("Mat_PillowWhite")
+size = Vector3(0.72, 0.16, 0.42)
+
+[sub_resource type="CylinderMesh" id="Mesh_BedLeg"]
+material = SubResource("Mat_BedWalnut")
+top_radius = 0.035
+bottom_radius = 0.02
+height = 0.24
+
+[sub_resource type="BoxMesh" id="Mesh_Nightstand"]
+material = SubResource("Mat_BedWalnut")
+size = Vector3(0.55, 0.55, 0.45)
+
+[sub_resource type="CylinderMesh" id="Mesh_NightstandLamp"]
+material = SubResource("Mat_BedsideLampshade")
+top_radius = 0.1
+bottom_radius = 0.15
+height = 0.22
+
+[sub_resource type="BoxMesh" id="Mesh_Dresser"]
+material = SubResource("Mat_BedWalnut")
+size = Vector3(1.05, 0.95, 0.5)
+
+[sub_resource type="BoxMesh" id="Mesh_DresserHandle"]
+material = SubResource("Mat_BrassHandle")
+size = Vector3(0.18, 0.025, 0.03)
+
+[sub_resource type="BoxShape3D" id="Shape_Bed"]
+size = Vector3(2.15, 1.0, 2.2)
+
+[sub_resource type="BoxShape3D" id="Shape_Nightstand"]
+size = Vector3(0.6, 0.8, 0.5)
+
+[sub_resource type="BoxShape3D" id="Shape_Dresser"]
+size = Vector3(1.1, 1.0, 0.55)
+
+[node name="CraftsmanBedroomSuite" type="StaticBody3D"]
+
+[node name="ColBed" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("Shape_Bed")
+
+[node name="ColNightstandL" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0.4, 0.8)
+shape = SubResource("Shape_Nightstand")
+
+[node name="ColNightstandR" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 0.4, 0.8)
+shape = SubResource("Shape_Nightstand")
+
+[node name="ColDresser" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, 0.5, -1.5)
+shape = SubResource("Shape_Dresser")
+
+[node name="PlatformBed" type="Node3D" parent="."]
+
+[node name="Frame" type="MeshInstance3D" parent="PlatformBed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, 0)
+mesh = SubResource("Mesh_PlatformBedFrame")
+
+[node name="Headboard" type="MeshInstance3D" parent="PlatformBed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72, 1.05)
+mesh = SubResource("Mesh_Headboard")
+
+[node name="Mattress" type="MeshInstance3D" parent="PlatformBed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48, -0.05)
+mesh = SubResource("Mesh_MattressDuvet")
+
+[node name="Throw" type="MeshInstance3D" parent="PlatformBed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, -0.6)
+mesh = SubResource("Mesh_FoldedThrow")
+
+[node name="PillowL" type="MeshInstance3D" parent="PlatformBed"]
+transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, -0.5, 0.68, 0.75)
+mesh = SubResource("Mesh_BedPillow")
+
+[node name="PillowR" type="MeshInstance3D" parent="PlatformBed"]
+transform = Transform3D(0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, 0.5, 0.68, 0.75)
+mesh = SubResource("Mesh_BedPillow")
+
+[node name="Leg1" type="MeshInstance3D" parent="PlatformBed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.95, 0.12, -0.98)
+mesh = SubResource("Mesh_BedLeg")
+
+[node name="Leg2" type="MeshInstance3D" parent="PlatformBed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.95, 0.12, -0.98)
+mesh = SubResource("Mesh_BedLeg")
+
+[node name="Leg3" type="MeshInstance3D" parent="PlatformBed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.95, 0.12, 0.98)
+mesh = SubResource("Mesh_BedLeg")
+
+[node name="Leg4" type="MeshInstance3D" parent="PlatformBed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.95, 0.12, 0.98)
+mesh = SubResource("Mesh_BedLeg")
+
+[node name="NightstandLeft" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0, 0.8)
+
+[node name="Body" type="MeshInstance3D" parent="NightstandLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, 0)
+mesh = SubResource("Mesh_Nightstand")
+
+[node name="Lamp" type="MeshInstance3D" parent="NightstandLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68, 0)
+mesh = SubResource("Mesh_NightstandLamp")
+
+[node name="LampLight" type="OmniLight3D" parent="NightstandLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72, 0)
+light_color = Color(1, 0.9, 0.75, 1)
+light_energy = 0.65
+omni_range = 2.5
+
+[node name="NightstandRight" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 0, 0.8)
+
+[node name="Body" type="MeshInstance3D" parent="NightstandRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, 0)
+mesh = SubResource("Mesh_Nightstand")
+
+[node name="Lamp" type="MeshInstance3D" parent="NightstandRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68, 0)
+mesh = SubResource("Mesh_NightstandLamp")
+
+[node name="LampLight" type="OmniLight3D" parent="NightstandRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72, 0)
+light_color = Color(1, 0.9, 0.75, 1)
+light_energy = 0.65
+omni_range = 2.5
+
+[node name="Dresser" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, 0, -1.5)
+
+[node name="Body" type="MeshInstance3D" parent="Dresser"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48, 0)
+mesh = SubResource("Mesh_Dresser")
+
+[node name="Handle1" type="MeshInstance3D" parent="Dresser"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.76, 0.26)
+mesh = SubResource("Mesh_DresserHandle")
+
+[node name="Handle2" type="MeshInstance3D" parent="Dresser"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56, 0.26)
+mesh = SubResource("Mesh_DresserHandle")
+
+[node name="Handle3" type="MeshInstance3D" parent="Dresser"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36, 0.26)
+mesh = SubResource("Mesh_DresserHandle")
+
+[node name="Handle4" type="MeshInstance3D" parent="Dresser"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16, 0.26)
+mesh = SubResource("Mesh_DresserHandle")

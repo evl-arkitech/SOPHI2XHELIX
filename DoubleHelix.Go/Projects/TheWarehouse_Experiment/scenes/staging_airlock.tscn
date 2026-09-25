@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/staging_wheel.gd" id="1_airlocksc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wheel"]
+size = Vector3(1.2, 1.2, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brass"]
+albedo_color = Color(0.7, 0.55, 0.2, 1)
+metallic = 0.9
+roughness = 0.3
+
+[sub_resource type="TorusMesh" id="TorusMesh_whl"]
+material = SubResource("StandardMaterial3D_brass")
+inner_radius = 0.35
+outer_radius = 0.55
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blast"]
+albedo_color = Color(0.12, 0.14, 0.16, 1)
+metallic = 0.95
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_door"]
+material = SubResource("StandardMaterial3D_blast")
+size = Vector3(4.0, 4.2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_door"]
+size = Vector3(4.0, 4.2, 0.4)
+
+[node name="StagingAirlock" type="StaticBody3D" groups=["interactable"]]
+collision_layer = 1
+script = ExtResource("1_airlocksc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 1.5, 0)
+shape = SubResource("BoxShape3D_wheel")
+
+[node name="WheelMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 1.5, 0.2)
+mesh = SubResource("TorusMesh_whl")
+
+[node name="AirlockDoor" type="AnimatableBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+collision_layer = 1
+
+[node name="DoorMesh" type="MeshInstance3D" parent="AirlockDoor"]
+mesh = SubResource("BoxMesh_door")
+
+[node name="DoorCol" type="CollisionShape3D" parent="AirlockDoor"]
+shape = SubResource("BoxShape3D_door")

@@ -1,0 +1,194 @@
+[gd_scene format=3 uid="uid://c16gyys5itk0l"]
+
+[ext_resource type="Script" uid="uid://b4lshtcnbvkrj" path="res://scripts/tactical_hud.gd" id="1_hud"]
+
+[node name="TacticalHUD" type="Control" unique_id=248115766]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_hud")
+
+[node name="NVGOverlay" type="ColorRect" parent="." unique_id=2043892559]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.08, 0.35, 0.12, 0.38)
+
+[node name="TopHeader" type="HBoxContainer" parent="." unique_id=804535817]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = -24.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_constants/separation = 24
+
+[node name="RoleBadge" type="Label" parent="TopHeader" unique_id=1384432805]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "🛡️ DEFENDER (OCCUPANT) • REFUGE RESIDENCE"
+
+[node name="SheafCoherenceLabel" type="Label" parent="TopHeader" unique_id=1504341321]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 13
+text = "SOPHI COHERENCE: 100.0% | P(Ruin): 0.0000"
+horizontal_alignment = 1
+
+[node name="DirichletLabel" type="Label" parent="TopHeader" unique_id=881479425]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "E_F DIRICHLET: 0.0000 J"
+horizontal_alignment = 2
+
+[node name="RadarContainer" type="VBoxContainer" parent="." unique_id=1340397205]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -240.0
+offset_right = 224.0
+offset_bottom = -24.0
+grow_vertical = 0
+theme_override_constants/separation = 6
+
+[node name="ThreatWarning" type="Label" parent="RadarContainer" unique_id=272813118]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "ACOUSTIC RADAR: SCANNING..."
+horizontal_alignment = 1
+
+[node name="RadarDisplay" type="Control" parent="RadarContainer" unique_id=1558051680]
+custom_minimum_size = Vector2(190, 190)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="VitalsContainer" type="VBoxContainer" parent="." unique_id=222776329]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 236.0
+offset_top = -140.0
+offset_right = 436.0
+offset_bottom = -24.0
+grow_vertical = 0
+theme_override_constants/separation = 6
+
+[node name="HealthLabel" type="Label" parent="VitalsContainer" unique_id=837340721]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "BIOMETRICS / HEALTH"
+
+[node name="HealthBar" type="ProgressBar" parent="VitalsContainer" unique_id=1964398410]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+value = 100.0
+show_percentage = false
+
+[node name="BatteryLabel" type="Label" parent="VitalsContainer" unique_id=1167725838]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "FLASHLIGHT / NVG BATTERY"
+
+[node name="BatteryBar" type="ProgressBar" parent="VitalsContainer" unique_id=2131476215]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+value = 100.0
+show_percentage = false
+
+[node name="NoiseLabel" type="Label" parent="VitalsContainer" unique_id=1325267205]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "ACOUSTIC NOISE EMISSION"
+
+[node name="NoiseMeter" type="ProgressBar" parent="VitalsContainer" unique_id=441732272]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+max_value = 10.0
+show_percentage = false
+
+[node name="BottomRight" type="VBoxContainer" parent="." unique_id=997256078]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -90.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="WeaponLabel" type="Label" parent="BottomRight" unique_id=587170069]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "REMINGTON 870 TACTICAL"
+horizontal_alignment = 2
+
+[node name="AmmoLabel" type="Label" parent="BottomRight" unique_id=8649760]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "6 / 18"
+horizontal_alignment = 2
+
+[node name="CenterContainer" type="Control" parent="." unique_id=1783034426]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Crosshair" type="Control" parent="CenterContainer" unique_id=268924390]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="InteractionPrompt" type="Label" parent="CenterContainer" unique_id=1937397659]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -30.0
+offset_right = 150.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 14
+text = "[E] Open Door"
+horizontal_alignment = 1

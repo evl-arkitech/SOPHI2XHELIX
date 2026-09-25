@@ -1,0 +1,21 @@
+================================================================================
+END USER LICENSE AGREEMENT (EULA)
+DOUBLEHELIX TACTICAL ARENA
+================================================================================
+
+IMPORTANT: PLEASE READ THIS END USER LICENSE AGREEMENT CAREFULLY.
+By launching, installing, or executing DoubleHelix Tactical Arena, you accept all terms and
+conditions set forth by Cosmic Souls of Sovereignty Inc. (arkade.new-world-arkitech.dev).
+
+1. ACCESS AND PLAY
+You are granted personal, non-commercial entertainment and simulation access.
+
+2. ASSET STREAMING
+This game utilizes the DoubleHelix Remote Asset Loading Pipeline. Assets may be
+dynamically streamed or cached from https://arkade.new-world-arkitech.dev/assets/.
+
+3. TELEMETRY & FAIR PLAY
+State synchronization and acoustic surveillance metrics are governed by
+the Double Helix deterministic kernel to maintain invariant guarantees.
+
+(c) 2026 Cosmic Souls of Sovereignty Inc.. All rights reserved.

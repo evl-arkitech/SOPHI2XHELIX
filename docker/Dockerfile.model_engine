@@ -1,0 +1,21 @@
+# Container 1: Model Engine (Cognitive Specialization)
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt pyproject.toml ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY src/ ./src/
+COPY anat_memory/ ./anat_memory/
+RUN pip install -e .
+
+EXPOSE 8001 8002
+
+# Default entrypoint runs unified model engine
+CMD ["python", "-m", "doublehelix.model_engine.server", "8001"]

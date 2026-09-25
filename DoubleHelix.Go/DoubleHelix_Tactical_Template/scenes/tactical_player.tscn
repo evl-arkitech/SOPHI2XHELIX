@@ -1,0 +1,144 @@
+[gd_scene format=3 uid="uid://d2s0f21vvyvll"]
+
+[ext_resource type="Script" uid="uid://b0q20gh7rt6xw" path="res://scripts/tactical_player.gd" id="1_player"]
+[ext_resource type="AudioStream" uid="uid://bku31xfscccxe" path="res://assets/audio/breathing.mp3" id="2_breath"]
+[ext_resource type="AudioStream" uid="uid://dvxymu0ogv66f" path="res://assets/audio/heartbeat.mp3" id="3_heart"]
+[ext_resource type="PackedScene" path="res://scenes/tactical_shotgun.tscn" id="4_shotgun"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vessel"]
+radius = 0.38
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vessel"]
+albedo_color = Color(0.12, 0.14, 0.18, 1)
+roughness = 0.85
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vessel"]
+material = SubResource("StandardMaterial3D_vessel")
+radius = 0.38
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gun"]
+albedo_color = Color(0.08, 0.08, 0.09, 1)
+metallic = 0.8
+roughness = 0.35
+
+[sub_resource type="BoxMesh" id="BoxMesh_gun"]
+material = SubResource("StandardMaterial3D_gun")
+size = Vector3(0.06, 0.1, 0.75)
+
+[sub_resource type="Gradient" id="Gradient_shock"]
+colors = PackedColorArray(0.8, 0.05, 0.05, 0.8, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_shock"]
+gradient = SubResource("Gradient_shock")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+
+[node name="TacticalPlayer" type="CharacterBody3D" unique_id=589744915]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1685554253]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_vessel")
+
+[node name="FloorRay" type="RayCast3D" parent="." unique_id=445794782]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+target_position = Vector3(0, -0.6, 0)
+
+[node name="CharacterMesh" type="MeshInstance3D" parent="." unique_id=742113195]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_vessel")
+
+[node name="Neck" type="Node3D" parent="." unique_id=1873811425]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="FirstPersonCamera" type="Camera3D" parent="Neck" unique_id=281436459]
+current = true
+fov = 76.0
+
+[node name="Flashlight" type="SpotLight3D" parent="Neck/FirstPersonCamera" unique_id=1013199708]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, -0.12, -0.15)
+light_color = Color(1, 0.94, 0.84, 1)
+light_energy = 5.2
+shadow_enabled = true
+spot_range = 28.0
+spot_angle = 56.0
+
+[node name="FlashlightBounce" type="OmniLight3D" parent="Neck/FirstPersonCamera" unique_id=1759666182]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8)
+light_color = Color(1, 0.93, 0.82, 1)
+light_energy = 0.9
+omni_range = 6.5
+
+[node name="InteractionRay" type="RayCast3D" parent="Neck/FirstPersonCamera" unique_id=1709619850]
+target_position = Vector3(0, 0, -2.6)
+collision_mask = 3
+
+[node name="WeaponRig" type="Node3D" parent="Neck/FirstPersonCamera" unique_id=585014714]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, -0.2, -0.42)
+
+[node name="TacticalShotgun" parent="Neck/FirstPersonCamera/WeaponRig" instance=ExtResource("4_shotgun")]
+
+[node name="MuzzleFlash" type="OmniLight3D" parent="Neck/FirstPersonCamera/WeaponRig" unique_id=616715]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.022, -0.65)
+visible = false
+light_color = Color(1, 0.82, 0.45, 1)
+light_energy = 8.0
+omni_range = 6.0
+
+[node name="NVGIlluminator" type="OmniLight3D" parent="Neck" unique_id=936457280]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+visible = false
+light_color = Color(0.4, 0.95, 0.65, 1)
+light_energy = 1.9
+omni_range = 25.0
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Neck" unique_id=391703854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.15, 0)
+spring_length = 2.2
+margin = 0.2
+
+[node name="ThirdPersonCamera" type="Camera3D" parent="Neck/SpringArm3D" unique_id=1706244241]
+fov = 72.0
+
+[node name="VesselSensors" type="Node3D" parent="." unique_id=1139776696]
+
+[node name="BreathAudio" type="AudioStreamPlayer" parent="VesselSensors" unique_id=1101697151]
+stream = ExtResource("2_breath")
+volume_db = -35.0
+
+[node name="HeartAudio" type="AudioStreamPlayer" parent="VesselSensors" unique_id=400205947]
+stream = ExtResource("3_heart")
+volume_db = -40.0
+
+[node name="BodyImpactAudio" type="AudioStreamPlayer3D" parent="VesselSensors" unique_id=445663836]
+unit_size = 2.5
+max_distance = 20.0
+
+[node name="OcularVignette" type="CanvasLayer" parent="." unique_id=832741739]
+
+[node name="NVGLens" type="ColorRect" parent="OcularVignette" unique_id=1007739893]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.12, 0.42, 0.15, 0.32)
+
+[node name="ShockVignette" type="TextureRect" parent="OcularVignette" unique_id=916127499]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_shock")
+expand_mode = 1

@@ -1,0 +1,29 @@
+# Container 3: High-Performance Shared Engine Runtime
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    xvfb \
+    xauth \
+    libgl1 \
+    libglx-mesa0 \
+    libgl1-mesa-dri \
+    clang \
+    valgrind \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt pyproject.toml ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY src/ ./src/
+COPY anat_memory/ ./anat_memory/
+RUN pip install -e .
+
+EXPOSE 5000
+
+ENV RUNTIME_PORT=5000
+ENV RUNTIME_WORK_DIR=/tmp/game_sim
+
+CMD ["python", "-m", "doublehelix.runtime.game_runner"]

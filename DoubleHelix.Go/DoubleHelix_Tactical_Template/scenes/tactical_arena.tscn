@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://cmlbsmmikejrk"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_fqdbt"]
+size = Vector3(12, 0.2, 16)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j5fqt"]
+size = Vector3(12, 0.2, 16)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pt5uc"]
+size = Vector3(12, 3.5, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p1i5r"]
+size = Vector3(12, 3.5, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fhaxv"]
+size = Vector3(12, 3.5, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ib32m"]
+size = Vector3(12, 3.5, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_irugv"]
+size = Vector3(0.2, 3.5, 16)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h1ci0"]
+size = Vector3(0.2, 3.5, 16)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qwnuk"]
+size = Vector3(0.2, 3.5, 16)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w77dj"]
+size = Vector3(0.2, 3.5, 16)
+
+[node name="TacticalRoom" type="Node3D" unique_id=1568190705]
+
+[node name="FloorStaticBody" type="StaticBody3D" parent="." unique_id=155434731]
+
+[node name="FloorMesh" type="MeshInstance3D" parent="FloorStaticBody" unique_id=2098298233]
+mesh = SubResource("BoxMesh_fqdbt")
+
+[node name="FloorCollision" type="CollisionShape3D" parent="FloorStaticBody" unique_id=1982190745]
+shape = SubResource("BoxShape3D_j5fqt")
+
+[node name="CeilingStaticBody" type="StaticBody3D" parent="." unique_id=1274184607]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
+
+[node name="CeilingMesh" type="MeshInstance3D" parent="CeilingStaticBody" unique_id=1150419903]
+mesh = SubResource("BoxMesh_fqdbt")
+
+[node name="CeilingCollision" type="CollisionShape3D" parent="CeilingStaticBody" unique_id=392932643]
+shape = SubResource("BoxShape3D_j5fqt")
+
+[node name="WallNorth" type="StaticBody3D" parent="." unique_id=1236929359]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, -8)
+
+[node name="WallNorthMesh" type="MeshInstance3D" parent="WallNorth" unique_id=1146991189]
+mesh = SubResource("BoxMesh_pt5uc")
+
+[node name="WallNorthCollision" type="CollisionShape3D" parent="WallNorth" unique_id=1796397083]
+shape = SubResource("BoxShape3D_p1i5r")
+
+[node name="WallSouth" type="StaticBody3D" parent="." unique_id=1158988244]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 8)
+
+[node name="WallSouthMesh" type="MeshInstance3D" parent="WallSouth" unique_id=2105126441]
+mesh = SubResource("BoxMesh_fhaxv")
+
+[node name="WallSouthCollision" type="CollisionShape3D" parent="WallSouth" unique_id=1810892800]
+shape = SubResource("BoxShape3D_ib32m")
+
+[node name="WallWest" type="StaticBody3D" parent="." unique_id=1375249709]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.75, 0)
+
+[node name="WallWestMesh" type="MeshInstance3D" parent="WallWest" unique_id=408305094]
+mesh = SubResource("BoxMesh_irugv")
+
+[node name="WallWestCollision" type="CollisionShape3D" parent="WallWest" unique_id=84249108]
+shape = SubResource("BoxShape3D_h1ci0")
+
+[node name="WallEast" type="StaticBody3D" parent="." unique_id=246106255]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.75, 0)
+
+[node name="WallEastMesh" type="MeshInstance3D" parent="WallEast" unique_id=1258869017]
+mesh = SubResource("BoxMesh_qwnuk")
+
+[node name="WallEastCollision" type="CollisionShape3D" parent="WallEast" unique_id=1689338460]
+shape = SubResource("BoxShape3D_w77dj")
+
+[node name="TacticalLight" type="OmniLight3D" parent="." unique_id=77511960]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
+light_energy = 1.8
+shadow_enabled = true
+omni_range = 19.2

@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/kitchen/granite_diffuse_2k.jpg" id="1_nd1af"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/kitchen/granite_normal_2k.jpg" id="2_45pft"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/kitchen/granite_roughness_2k.jpg" id="3_hi70d"]
+
+[resource]
+albedo_texture = ExtResource("1_nd1af")
+metallic = 0.1
+roughness = 0.35
+roughness_texture = ExtResource("3_hi70d")
+normal_enabled = true
+normal_texture = ExtResource("2_45pft")
+uv1_scale = Vector3(1.5, 1.5, 1)

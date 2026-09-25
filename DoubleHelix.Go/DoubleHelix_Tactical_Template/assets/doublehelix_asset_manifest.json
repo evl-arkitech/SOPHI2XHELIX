@@ -1,0 +1,78 @@
+{
+  "storage_container_url": "https://arkade.new-world-arkitech.dev/assets",
+  "domain": "arkade.new-world-arkitech.dev",
+  "pbr_materials": {
+    "walnut_wood": {
+      "albedo": "textures/pbr/wood/walnut_diffuse_2k.jpg",
+      "normal": "textures/pbr/wood/walnut_normal_2k.jpg",
+      "roughness": "textures/pbr/wood/walnut_roughness_2k.jpg",
+      "uv_scale": [
+        2.0,
+        2.0
+      ]
+    },
+    "tile": {
+      "albedo": "textures/pbr/tiles/tile_diffuse_2k.jpg",
+      "normal": "textures/pbr/tiles/tile_normal_2k.jpg",
+      "roughness": "textures/pbr/tiles/tile_roughness_2k.jpg",
+      "uv_scale": [
+        3.0,
+        3.0
+      ]
+    },
+    "carpet": {
+      "albedo": "textures/pbr/carpet/carpet_diffuse_2k.jpg",
+      "normal": "textures/pbr/carpet/carpet_normal_2k.jpg",
+      "roughness": "textures/pbr/carpet/carpet_roughness_2k.jpg",
+      "uv_scale": [
+        2.5,
+        2.5
+      ]
+    },
+    "drywall_plaster": {
+      "albedo": "textures/pbr/drywall/plaster_diffuse_2k.jpg",
+      "normal": "textures/pbr/drywall/plaster_normal_2k.jpg",
+      "roughness": "textures/pbr/drywall/plaster_roughness_2k.jpg",
+      "uv_scale": [
+        1.0,
+        1.0
+      ]
+    },
+    "granite_countertop": {
+      "albedo": "textures/pbr/kitchen/granite_diffuse_2k.jpg",
+      "normal": "textures/pbr/kitchen/granite_normal_2k.jpg",
+      "roughness": "textures/pbr/kitchen/granite_roughness_2k.jpg",
+      "uv_scale": [
+        1.5,
+        1.5
+      ]
+    },
+    "exterior_brick": {
+      "albedo": "textures/pbr/brick/brick_diffuse_2k.jpg",
+      "normal": "textures/pbr/brick/brick_normal_2k.jpg",
+      "roughness": "textures/pbr/brick/brick_roughness_2k.jpg",
+      "uv_scale": [
+        3.0,
+        3.0
+      ]
+    },
+    "brushed_steel": {
+      "albedo": "textures/pbr/metal/steel_brushed_normal.jpg",
+      "normal": "textures/pbr/metal/steel_brushed_normal.jpg",
+      "roughness": "textures/pbr/drywall/plaster_roughness_2k.jpg",
+      "metallic": 0.85,
+      "uv_scale": [
+        2.0,
+        2.0
+      ]
+    }
+  },
+  "character_models": {
+    "tactical_operative": "models/character_bundle.js",
+    "intruder": "clothing/unreal_pbr/T_Denim_Dark_D.png"
+  },
+  "blueprints": {
+    "colonial_house": "art/blueprint_level1_colonial.jpg",
+    "urban_tenement": "blueprints/tactical_house_blueprint.png"
+  }
+}

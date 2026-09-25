@@ -1,0 +1,242 @@
+[gd_scene format=3 uid="uid://cy7xq9w2pn8va"]
+
+[ext_resource type="Script" path="res://scripts/tactical_shotgun.gd" id="1_shotgun"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/metal/steel_brushed_normal.jpg" id="2_steel_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/wood/walnut_diffuse_2k.jpg" id="3_wood_diff"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/wood/walnut_normal_2k.jpg" id="4_wood_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/wood/walnut_roughness_2k.jpg" id="5_wood_rough"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_Gunmetal"]
+albedo_color = Color(0.12, 0.125, 0.135, 1)
+metallic = 0.88
+roughness = 0.28
+normal_enabled = true
+normal_texture = ExtResource("2_steel_norm")
+uv1_scale = Vector3(2, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Barrel"]
+albedo_color = Color(0.09, 0.095, 0.105, 1)
+metallic = 0.92
+roughness = 0.22
+normal_enabled = true
+normal_texture = ExtResource("2_steel_norm")
+uv1_scale = Vector3(1, 4, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Walnut"]
+albedo_color = Color(0.42, 0.28, 0.18, 1)
+albedo_texture = ExtResource("3_wood_diff")
+roughness = 0.52
+roughness_texture = ExtResource("5_wood_rough")
+normal_enabled = true
+normal_texture = ExtResource("4_wood_norm")
+uv1_scale = Vector3(1.5, 1.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_PolymerRib"]
+albedo_color = Color(0.14, 0.14, 0.15, 1)
+metallic = 0.15
+roughness = 0.75
+
+[sub_resource type="StandardMaterial3D" id="Mat_RubberPad"]
+albedo_color = Color(0.05, 0.05, 0.05, 1)
+metallic = 0.05
+roughness = 0.94
+
+[sub_resource type="StandardMaterial3D" id="Mat_Brass"]
+albedo_color = Color(0.92, 0.76, 0.28, 1)
+metallic = 0.96
+roughness = 0.18
+
+[sub_resource type="StandardMaterial3D" id="Mat_RedHull"]
+albedo_color = Color(0.82, 0.10, 0.08, 1)
+metallic = 0.08
+roughness = 0.32
+
+[sub_resource type="StandardMaterial3D" id="Mat_Chrome"]
+albedo_color = Color(0.85, 0.86, 0.90, 1)
+metallic = 0.98
+roughness = 0.14
+
+[sub_resource type="BoxMesh" id="Mesh_Receiver"]
+material = SubResource("Mat_Gunmetal")
+size = Vector3(0.042, 0.072, 0.22)
+
+[sub_resource type="BoxMesh" id="Mesh_EjectionPort"]
+material = SubResource("Mat_Gunmetal")
+size = Vector3(0.012, 0.026, 0.075)
+
+[sub_resource type="BoxMesh" id="Mesh_BoltCarrier"]
+material = SubResource("Mat_Chrome")
+size = Vector3(0.01, 0.022, 0.065)
+
+[sub_resource type="CylinderMesh" id="Mesh_Barrel"]
+material = SubResource("Mat_Barrel")
+top_radius = 0.012
+bottom_radius = 0.012
+height = 0.54
+radial_segments = 16
+
+[sub_resource type="BoxMesh" id="Mesh_VentRib"]
+material = SubResource("Mat_Barrel")
+size = Vector3(0.008, 0.008, 0.52)
+
+[sub_resource type="CylinderMesh" id="Mesh_FrontBead"]
+material = SubResource("Mat_Brass")
+top_radius = 0.003
+bottom_radius = 0.003
+height = 0.008
+
+[sub_resource type="CylinderMesh" id="Mesh_MagTube"]
+material = SubResource("Mat_Barrel")
+top_radius = 0.011
+bottom_radius = 0.011
+height = 0.46
+radial_segments = 16
+
+[sub_resource type="CylinderMesh" id="Mesh_MagCap"]
+material = SubResource("Mat_Gunmetal")
+top_radius = 0.0135
+bottom_radius = 0.0135
+height = 0.025
+radial_segments = 16
+
+[sub_resource type="BoxMesh" id="Mesh_BarrelClamp"]
+material = SubResource("Mat_Gunmetal")
+size = Vector3(0.03, 0.044, 0.02)
+
+[sub_resource type="BoxMesh" id="Mesh_PumpSlide"]
+material = SubResource("Mat_Walnut")
+size = Vector3(0.04, 0.042, 0.18)
+
+[sub_resource type="BoxMesh" id="Mesh_PumpGroove"]
+material = SubResource("Mat_PolymerRib")
+size = Vector3(0.042, 0.044, 0.008)
+
+[sub_resource type="BoxMesh" id="Mesh_TriggerGuard"]
+material = SubResource("Mat_Gunmetal")
+size = Vector3(0.014, 0.032, 0.052)
+
+[sub_resource type="BoxMesh" id="Mesh_Trigger"]
+material = SubResource("Mat_Chrome")
+size = Vector3(0.006, 0.02, 0.008)
+
+[sub_resource type="BoxMesh" id="Mesh_GripNeck"]
+material = SubResource("Mat_Walnut")
+size = Vector3(0.034, 0.065, 0.1)
+
+[sub_resource type="BoxMesh" id="Mesh_StockComb"]
+material = SubResource("Mat_Walnut")
+size = Vector3(0.038, 0.11, 0.28)
+
+[sub_resource type="BoxMesh" id="Mesh_RecoilPad"]
+material = SubResource("Mat_RubberPad")
+size = Vector3(0.042, 0.12, 0.024)
+
+[sub_resource type="CylinderMesh" id="Mesh_ShellBrass"]
+material = SubResource("Mat_Brass")
+top_radius = 0.009
+bottom_radius = 0.009
+height = 0.016
+radial_segments = 12
+
+[sub_resource type="CylinderMesh" id="Mesh_ShellHull"]
+material = SubResource("Mat_RedHull")
+top_radius = 0.0088
+bottom_radius = 0.0088
+height = 0.042
+radial_segments = 12
+
+[node name="TacticalShotgun" type="Node3D"]
+script = ExtResource("1_shotgun")
+
+[node name="Receiver" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_Receiver")
+
+[node name="EjectionPort" type="MeshInstance3D" parent="Receiver"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018, 0.012, 0.02)
+mesh = SubResource("Mesh_EjectionPort")
+
+[node name="BoltCarrier" type="MeshInstance3D" parent="Receiver"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.016, 0.012, 0.015)
+mesh = SubResource("Mesh_BoltCarrier")
+
+[node name="Barrel" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.022, -0.37)
+mesh = SubResource("Mesh_Barrel")
+
+[node name="VentilatedRib" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.038, -0.37)
+mesh = SubResource("Mesh_VentRib")
+
+[node name="FrontBeadSight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.046, -0.62)
+mesh = SubResource("Mesh_FrontBead")
+
+[node name="MagazineTube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.012, -0.33)
+mesh = SubResource("Mesh_MagTube")
+
+[node name="MagazineCap" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.012, -0.56)
+mesh = SubResource("Mesh_MagCap")
+
+[node name="BarrelClamp" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, -0.51)
+mesh = SubResource("Mesh_BarrelClamp")
+
+[node name="PumpSlide" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.012, -0.28)
+
+[node name="SlideGrip" type="MeshInstance3D" parent="PumpSlide"]
+mesh = SubResource("Mesh_PumpSlide")
+
+[node name="SlideGroove1" type="MeshInstance3D" parent="PumpSlide"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.05)
+mesh = SubResource("Mesh_PumpGroove")
+
+[node name="SlideGroove2" type="MeshInstance3D" parent="PumpSlide"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("Mesh_PumpGroove")
+
+[node name="SlideGroove3" type="MeshInstance3D" parent="PumpSlide"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
+mesh = SubResource("Mesh_PumpGroove")
+
+[node name="TriggerGuard" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0.04)
+mesh = SubResource("Mesh_TriggerGuard")
+
+[node name="Trigger" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.046, 0.035)
+mesh = SubResource("Mesh_Trigger")
+
+[node name="Buttstock" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.11)
+
+[node name="GripNeck" type="MeshInstance3D" parent="Buttstock"]
+transform = Transform3D(1, 0, 0, 0, 0.951057, 0.309017, 0, -0.309017, 0.951057, 0, -0.042, 0.04)
+mesh = SubResource("Mesh_GripNeck")
+
+[node name="StockComb" type="MeshInstance3D" parent="Buttstock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.055, 0.22)
+mesh = SubResource("Mesh_StockComb")
+
+[node name="RecoilPad" type="MeshInstance3D" parent="Buttstock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.055, 0.365)
+mesh = SubResource("Mesh_RecoilPad")
+
+[node name="ChamberShell" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.016, 0.012, 0.015)
+
+[node name="ShellBrass" type="MeshInstance3D" parent="ChamberShell"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.02)
+mesh = SubResource("Mesh_ShellBrass")
+
+[node name="ShellHull" type="MeshInstance3D" parent="ChamberShell"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.01)
+mesh = SubResource("Mesh_ShellHull")
+
+[node name="MuzzleMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.022, -0.64)
+
+[node name="EjectionPortMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.025, 0.012, 0.02)

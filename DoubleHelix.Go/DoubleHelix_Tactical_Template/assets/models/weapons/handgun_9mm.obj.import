@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bqsl5v67s0mfi"
+path="res://.godot/imported/handgun_9mm.obj-51a1ffbee649829d7e4b4df75eb20ab1.mesh"
+
+[deps]
+
+files=["res://.godot/imported/handgun_9mm.obj-51a1ffbee649829d7e4b4df75eb20ab1.mesh"]
+
+source_file="res://assets/models/weapons/handgun_9mm.obj"
+dest_files=["res://.godot/imported/handgun_9mm.obj-51a1ffbee649829d7e4b4df75eb20ab1.mesh", "res://.godot/imported/handgun_9mm.obj-51a1ffbee649829d7e4b4df75eb20ab1.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

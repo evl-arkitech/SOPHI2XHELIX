@@ -1,0 +1,28 @@
+================================================================================
+DOUBLEHELIX TACTICAL ARENA - PROPRIETARY COMMERCIAL SOFTWARE LICENSE
+Engine: DoubleHelix Neural Agent Engine (DoubleHelix.Go Edition)
+Entity: Cosmic Souls of Sovereignty Inc.
+Domain: arkade.new-world-arkitech.dev
+================================================================================
+
+Copyright (c) 2026 Cosmic Souls of Sovereignty Inc.. All rights reserved.
+
+This software, game assets, compiled bytecodes, shaders, and procedural meshes
+are the proprietary property of Cosmic Souls of Sovereignty Inc. and distributed via arkade.new-world-arkitech.dev.
+
+1. GRANT OF LICENSE
+Subject to the terms of this Agreement, Cosmic Souls of Sovereignty Inc. grants the authorized licensee
+a non-exclusive, non-transferable right to execute and interact with this software.
+
+2. MATHEMATICAL INVARIANTS & INTEGRITY
+This game executable operates with certified Double Helix invariants:
+- Continuous Collision Detection (CCD) enabled on all character and ballistics bodies.
+- P(Ruin) bounded at 0.0000 across all player state trajectories.
+- Dynamic asset streaming verified against arkade.new-world-arkitech.dev/assets/.
+
+3. RESTRICTIONS
+Reverse engineering, decompilation, unauthorized asset extraction, or modification
+of the embedded cryptographic build signature is strictly prohibited.
+
+Signed & Certified by:
+Cosmic Souls of Sovereignty Inc. • arkade.new-world-arkitech.dev

@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/keypad_ui.gd" id="1_keypad"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bars"]
+albedo_color = Color(0.18, 0.18, 0.2, 1)
+metallic = 0.9
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_gate"]
+material = SubResource("StandardMaterial3D_bars")
+size = Vector3(4.5, 4.0, 0.15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gate"]
+size = Vector3(4.5, 4.0, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_keypad"]
+size = Vector3(0.4, 0.5, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kp"]
+albedo_color = Color(0.1, 0.12, 0.15, 1)
+metallic = 0.5
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_kp"]
+material = SubResource("StandardMaterial3D_kp")
+size = Vector3(0.4, 0.5, 0.15)
+
+[node name="SecurityTransitGate" type="Node3D"]
+
+[node name="GateBody" type="AnimatableBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0, 0)
+collision_layer = 1
+
+[node name="GateMesh" type="MeshInstance3D" parent="GateBody"]
+mesh = SubResource("BoxMesh_gate")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GateBody"]
+shape = SubResource("BoxShape3D_gate")
+
+[node name="Keypad" type="StaticBody3D" parent="." groups=["interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1.4, -0.1)
+collision_layer = 1
+script = ExtResource("1_keypad")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keypad"]
+shape = SubResource("BoxShape3D_keypad")
+
+[node name="KeypadMesh" type="MeshInstance3D" parent="Keypad"]
+mesh = SubResource("BoxMesh_kp")
+
+[node name="StatusLight" type="OmniLight3D" parent="Keypad"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0.12)
+light_color = Color(0.95, 0.1, 0.05, 1)
+light_energy = 0.6
+omni_range = 1.2

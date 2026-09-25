@@ -1,0 +1,23 @@
+# Container 2: Agent Orchestration (Helix Synchronizer + 6 Agents)
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt pyproject.toml ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY src/ ./src/
+COPY anat_memory/ ./anat_memory/
+RUN pip install -e .
+
+EXPOSE 8000
+
+ENV REASONING_LLM_URL=http://model-engine:8001/v1
+ENV CODING_LLM_URL=http://model-engine:8002/v1
+ENV RUNTIME_API_URL=http://shared-runtime:5000
+
+CMD ["python", "-m", "doublehelix.cli.main", "run"]

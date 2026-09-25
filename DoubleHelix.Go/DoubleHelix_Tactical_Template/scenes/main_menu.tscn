@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://b5kxfi6cokeek"]
+
+[ext_resource type="Script" uid="uid://dgchvvpr3wkcw" path="res://scripts/main_menu.gd" id="1_main_menu"]
+[ext_resource type="Texture2D" uid="uid://kbmpl5v0qyw6" path="res://assets/art/city_echoes_key_art.jpg" id="2_art"]
+[ext_resource type="PackedScene" uid="uid://gjoyk5ie3oqk" path="res://scenes/tactical_residence.tscn" id="3_bqqt6"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0huas"]
+
+[node name="MainMenu" type="Control" unique_id=2005749902]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_main_menu")
+
+[node name="BackgroundArt" type="TextureRect" parent="." unique_id=1918417088]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_art")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="CinematicVignette" type="TextureRect" parent="." unique_id=1100101536]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_0huas")
+expand_mode = 1
+
+[node name="UILayout" type="VBoxContainer" parent="." unique_id=130020746]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 520.0
+offset_bottom = -64.0
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="UILayout" unique_id=1581671140]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "CITY ECHOES"
+
+[node name="SubtitleLabel" type="Label" parent="UILayout" unique_id=1610529054]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.8, 0.9, 1)
+theme_override_font_sizes/font_size = 16
+text = "SOPHI REAL-LIFE ACOUSTIC SIMULATION"
+
+[node name="EntityLabel" type="Label" parent="UILayout" unique_id=930845171]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.6, 0.75, 1)
+theme_override_font_sizes/font_size = 12
+text = "Cosmic Souls of Sovereignty Inc. • arkade.new-world-arkitech.dev"
+
+[node name="HSeparator" type="HSeparator" parent="UILayout" unique_id=1226732883]
+layout_mode = 2
+
+[node name="SimulationTag" type="Label" parent="UILayout" unique_id=1509885653]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.7, 0.3, 1)
+theme_override_font_sizes/font_size = 13
+text = "PURE DIEGETIC SIMULATION // NO ON-SCREEN OVERLAYS
+RELY SOLELY ON YOUR EARS & PROXIMATE TOOLS"
+
+[node name="ButtonContainer" type="VBoxContainer" parent="UILayout" unique_id=1681152346]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="OccupantButton" type="Button" parent="UILayout/ButtonContainer" unique_id=1519196738]
+custom_minimum_size = Vector2(360, 48)
+layout_mode = 2
+text = "[ 1 ] PLAY AS OCCUPANT (DEFENDER)"
+alignment = 0
+
+[node name="IntruderButton" type="Button" parent="UILayout/ButtonContainer" unique_id=732843103]
+custom_minimum_size = Vector2(360, 48)
+layout_mode = 2
+text = "[ 2 ] PLAY AS INTRUDER (INFILTRATOR)"
+alignment = 0
+
+[node name="QuitButton" type="Button" parent="UILayout/ButtonContainer" unique_id=867065802]
+custom_minimum_size = Vector2(360, 38)
+layout_mode = 2
+text = "[ ESC ] QUIT SIMULATION"
+alignment = 0
+
+[node name="TacticalResidence" parent="UILayout/ButtonContainer" unique_id=1897756652 instance=ExtResource("3_bqqt6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.022205472, -1.2463831, 0.7637522)
+
+[node name="StorageStatus" type="Label" parent="UILayout" unique_id=398111304]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.25, 0.75, 0.5, 1)
+theme_override_font_sizes/font_size = 11
+text = "⚡ ARKADE PIPELINE: CONNECTING..."
+
+[node name="LegalNotice" type="Label" parent="UILayout" unique_id=1439400527]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.45, 0.55, 1)
+theme_override_font_sizes/font_size = 11
+text = "[ PRESS F12 IN SIMULATION FOR LEGAL AUDIT & CERTIFICATION ]"
+
+[node name="MenuAudio" type="AudioStreamPlayer" parent="." unique_id=709198241]
+volume_db = -12.0

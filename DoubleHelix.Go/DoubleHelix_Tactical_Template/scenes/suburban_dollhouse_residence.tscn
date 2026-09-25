@@ -1,0 +1,593 @@
+[gd_scene format=3 uid="uid://b5k8j9q2w4m3v"]
+
+[ext_resource type="Script" path="res://scripts/dollhouse_director.gd" id="1_director"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/wood/walnut_diffuse_2k.jpg" id="2_wood_diff"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/wood/walnut_normal_2k.jpg" id="3_wood_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/tiles/tile_diffuse_2k.jpg" id="5_tile_diff"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/tiles/tile_normal_2k.jpg" id="6_tile_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/drywall/plaster_diffuse_2k.jpg" id="7_plaster_diff"]
+[ext_resource type="Texture2D" path="res://assets/textures/pbr/drywall/plaster_normal_2k.jpg" id="8_plaster_norm"]
+[ext_resource type="PackedScene" path="res://scenes/tactical_door.tscn" id="9_door"]
+[ext_resource type="PackedScene" path="res://scenes/props/grand_piano.tscn" id="10_piano"]
+[ext_resource type="PackedScene" path="res://scenes/props/craftsman_sofa_suite.tscn" id="11_sofa"]
+[ext_resource type="PackedScene" path="res://scenes/props/craftsman_kitchen_dining.tscn" id="12_kitchen"]
+[ext_resource type="PackedScene" path="res://scenes/props/craftsman_staircase.tscn" id="13_stairs"]
+[ext_resource type="PackedScene" path="res://scenes/props/craftsman_bedroom_suite.tscn" id="14_bedroom"]
+[ext_resource type="PackedScene" path="res://scenes/tactical_player.tscn" id="15_player"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_SageSiding"]
+albedo_color = Color(0.48, 0.56, 0.47, 1)
+roughness = 0.72
+metallic = 0.0
+
+[sub_resource type="StandardMaterial3D" id="Mat_WhiteTrim"]
+albedo_color = Color(0.96, 0.96, 0.96, 1)
+roughness = 0.35
+metallic = 0.05
+
+[sub_resource type="StandardMaterial3D" id="Mat_CharcoalRoof"]
+albedo_color = Color(0.16, 0.18, 0.2, 1)
+roughness = 0.88
+metallic = 0.05
+
+[sub_resource type="StandardMaterial3D" id="Mat_Drywall"]
+albedo_color = Color(0.92, 0.9, 0.88, 1)
+roughness = 0.85
+metallic = 0.0
+normal_enabled = true
+normal_texture = ExtResource("8_plaster_norm")
+uv1_scale = Vector3(3, 3, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_WalnutHardwood"]
+albedo_texture = ExtResource("2_wood_diff")
+roughness = 0.3
+normal_enabled = true
+normal_texture = ExtResource("3_wood_norm")
+clearcoat_enabled = true
+clearcoat = 0.1
+uv1_scale = Vector3(3, 3, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_CeramicTile"]
+albedo_texture = ExtResource("5_tile_diff")
+roughness = 0.25
+normal_enabled = true
+normal_texture = ExtResource("6_tile_norm")
+uv1_scale = Vector3(3, 3, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_GarageConcrete"]
+albedo_color = Color(0.46, 0.48, 0.5, 1)
+roughness = 0.9
+metallic = 0.02
+
+[sub_resource type="StandardMaterial3D" id="Mat_GlassClear"]
+transparency = 1
+albedo_color = Color(0.9, 0.95, 0.98, 0.18)
+roughness = 0.04
+metallic = 0.1
+refraction_enabled = true
+refraction_scale = 0.03
+
+[sub_resource type="StandardMaterial3D" id="Mat_PorchDeckTimber"]
+albedo_color = Color(0.55, 0.44, 0.34, 1)
+roughness = 0.75
+
+[sub_resource type="StandardMaterial3D" id="Mat_LawnGrass"]
+albedo_color = Color(0.27, 0.42, 0.22, 1)
+roughness = 0.95
+
+[sub_resource type="StandardMaterial3D" id="Mat_Flagstone"]
+albedo_color = Color(0.72, 0.7, 0.67, 1)
+roughness = 0.85
+
+[sub_resource type="BoxMesh" id="Mesh_LawnGround"]
+material = SubResource("Mat_LawnGrass")
+size = Vector3(60, 0.4, 60)
+
+[sub_resource type="BoxShape3D" id="Shape_LawnGround"]
+size = Vector3(60, 0.4, 60)
+
+[sub_resource type="BoxMesh" id="Mesh_Floor_10x6"]
+material = SubResource("Mat_WalnutHardwood")
+size = Vector3(10, 0.1, 6)
+
+[sub_resource type="BoxShape3D" id="Shape_Floor_10x6"]
+size = Vector3(10, 0.1, 6)
+
+[sub_resource type="BoxMesh" id="Mesh_Floor_7_5x6"]
+material = SubResource("Mat_CeramicTile")
+size = Vector3(7.5, 0.1, 6)
+
+[sub_resource type="BoxShape3D" id="Shape_Floor_7_5x6"]
+size = Vector3(7.5, 0.1, 6)
+
+[sub_resource type="BoxMesh" id="Mesh_Floor_2_5x6"]
+material = SubResource("Mat_CeramicTile")
+size = Vector3(2.5, 0.1, 6)
+
+[sub_resource type="BoxShape3D" id="Shape_Floor_2_5x6"]
+size = Vector3(2.5, 0.1, 6)
+
+[sub_resource type="BoxMesh" id="Mesh_Floor_Garage"]
+material = SubResource("Mat_GarageConcrete")
+size = Vector3(5, 0.1, 12)
+
+[sub_resource type="BoxShape3D" id="Shape_Floor_Garage"]
+size = Vector3(5, 0.1, 12)
+
+[sub_resource type="BoxMesh" id="Mesh_WallExt_15x2_7"]
+material = SubResource("Mat_SageSiding")
+size = Vector3(15, 2.7, 0.3)
+
+[sub_resource type="BoxShape3D" id="Shape_WallExt_15x2_7"]
+size = Vector3(15, 2.7, 0.3)
+
+[sub_resource type="BoxMesh" id="Mesh_WallExt_12x2_7"]
+material = SubResource("Mat_SageSiding")
+size = Vector3(0.3, 2.7, 12)
+
+[sub_resource type="BoxShape3D" id="Shape_WallExt_12x2_7"]
+size = Vector3(0.3, 2.7, 12)
+
+[sub_resource type="BoxMesh" id="Mesh_WallExt_8x2_7"]
+material = SubResource("Mat_SageSiding")
+size = Vector3(8, 2.7, 0.3)
+
+[sub_resource type="BoxShape3D" id="Shape_WallExt_8x2_7"]
+size = Vector3(8, 2.7, 0.3)
+
+[sub_resource type="BoxMesh" id="Mesh_WallExt_3x2_7"]
+material = SubResource("Mat_SageSiding")
+size = Vector3(3, 2.7, 0.3)
+
+[sub_resource type="BoxShape3D" id="Shape_WallExt_3x2_7"]
+size = Vector3(3, 2.7, 0.3)
+
+[sub_resource type="BoxMesh" id="Mesh_WallInt_5x2_7"]
+material = SubResource("Mat_Drywall")
+size = Vector3(0.15, 2.7, 5)
+
+[sub_resource type="BoxShape3D" id="Shape_WallInt_5x2_7"]
+size = Vector3(0.15, 2.7, 5)
+
+[sub_resource type="BoxMesh" id="Mesh_WallInt_2x2_7"]
+material = SubResource("Mat_Drywall")
+size = Vector3(2.0, 2.7, 0.15)
+
+[sub_resource type="BoxShape3D" id="Shape_WallInt_2x2_7"]
+size = Vector3(2.0, 2.7, 0.15)
+
+[sub_resource type="BoxMesh" id="Mesh_ArchLintel"]
+material = SubResource("Mat_WhiteTrim")
+size = Vector3(5.0, 0.45, 0.15)
+
+[sub_resource type="BoxMesh" id="Mesh_SlidingDoorFrame"]
+material = SubResource("Mat_WhiteTrim")
+size = Vector3(4.0, 2.4, 0.16)
+
+[sub_resource type="BoxMesh" id="Mesh_SlidingGlassPanel"]
+material = SubResource("Mat_GlassClear")
+size = Vector3(0.92, 2.2, 0.04)
+
+[sub_resource type="BoxMesh" id="Mesh_PorchDeck"]
+material = SubResource("Mat_PorchDeckTimber")
+size = Vector3(7.2, 0.35, 2.5)
+
+[sub_resource type="BoxShape3D" id="Shape_PorchDeck"]
+size = Vector3(7.2, 0.35, 2.5)
+
+[sub_resource type="BoxMesh" id="Mesh_PorchColumn"]
+material = SubResource("Mat_WhiteTrim")
+size = Vector3(0.24, 2.7, 0.24)
+
+[sub_resource type="BoxMesh" id="Mesh_PorchRailing"]
+material = SubResource("Mat_WhiteTrim")
+size = Vector3(2.8, 0.8, 0.08)
+
+[sub_resource type="BoxMesh" id="Mesh_PorchRoof"]
+material = SubResource("Mat_CharcoalRoof")
+size = Vector3(7.6, 0.25, 2.8)
+
+[sub_resource type="BoxMesh" id="Mesh_RearPatioConcrete"]
+material = SubResource("Mat_GarageConcrete")
+size = Vector3(6.5, 0.1, 4.0)
+
+[sub_resource type="BoxShape3D" id="Shape_RearPatioConcrete"]
+size = Vector3(6.5, 0.1, 4.0)
+
+[sub_resource type="CylinderMesh" id="Mesh_SteppingStone"]
+material = SubResource("Mat_Flagstone")
+top_radius = 0.36
+bottom_radius = 0.4
+height = 0.05
+
+[sub_resource type="BoxMesh" id="Mesh_RoofShingleEast"]
+material = SubResource("Mat_CharcoalRoof")
+size = Vector3(8.5, 0.2, 13.0)
+
+[sub_resource type="BoxMesh" id="Mesh_RoofShingleWest"]
+material = SubResource("Mat_CharcoalRoof")
+size = Vector3(8.5, 0.2, 13.0)
+
+[sub_resource type="PrismMesh" id="Mesh_GablePeak"]
+material = SubResource("Mat_SageSiding")
+size = Vector3(7.5, 2.4, 0.3)
+
+[sub_resource type="Environment" id="Env_Dollhouse"]
+background_mode = 1
+background_color = Color(0.08, 0.1, 0.14, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.76, 0.86, 0.95, 1)
+ambient_light_energy = 0.7
+glow_enabled = true
+glow_bloom = 0.18
+ssao_enabled = true
+ssao_radius = 0.55
+ssao_intensity = 2.0
+
+[node name="SuburbanDollhouseResidence" type="Node3D"]
+script = ExtResource("1_director")
+
+[node name="ExteriorGrounds" type="Node3D" parent="."]
+
+[node name="LawnGround" type="StaticBody3D" parent="ExteriorGrounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ExteriorGrounds/LawnGround"]
+mesh = SubResource("Mesh_LawnGround")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExteriorGrounds/LawnGround"]
+shape = SubResource("Shape_LawnGround")
+
+[node name="FrontPorchDeck" type="StaticBody3D" parent="ExteriorGrounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.175, 7.25)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ExteriorGrounds/FrontPorchDeck"]
+mesh = SubResource("Mesh_PorchDeck")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExteriorGrounds/FrontPorchDeck"]
+shape = SubResource("Shape_PorchDeck")
+
+[node name="PorchPillarL" type="MeshInstance3D" parent="ExteriorGrounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 1.7, 8.35)
+mesh = SubResource("Mesh_PorchColumn")
+
+[node name="PorchPillarM" type="MeshInstance3D" parent="ExteriorGrounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 8.35)
+mesh = SubResource("Mesh_PorchColumn")
+
+[node name="PorchPillarR" type="MeshInstance3D" parent="ExteriorGrounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 1.7, 8.35)
+mesh = SubResource("Mesh_PorchColumn")
+
+[node name="PorchRailL" type="MeshInstance3D" parent="ExteriorGrounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0.75, 8.35)
+mesh = SubResource("Mesh_PorchRailing")
+
+[node name="PorchRailR" type="MeshInstance3D" parent="ExteriorGrounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0.75, 8.35)
+mesh = SubResource("Mesh_PorchRailing")
+
+[node name="PorchRoofEave" type="MeshInstance3D" parent="ExteriorGrounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.15, 7.35)
+mesh = SubResource("Mesh_PorchRoof")
+
+[node name="RearPatio" type="StaticBody3D" parent="ExteriorGrounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.05, -8.0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ExteriorGrounds/RearPatio"]
+mesh = SubResource("Mesh_RearPatioConcrete")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExteriorGrounds/RearPatio"]
+shape = SubResource("Shape_RearPatioConcrete")
+
+[node name="Stone1" type="MeshInstance3D" parent="ExteriorGrounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.03, -10.5)
+mesh = SubResource("Mesh_SteppingStone")
+
+[node name="Stone2" type="MeshInstance3D" parent="ExteriorGrounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7, 0.03, -11.5)
+mesh = SubResource("Mesh_SteppingStone")
+
+[node name="Stone3" type="MeshInstance3D" parent="ExteriorGrounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, 0.03, -12.5)
+mesh = SubResource("Mesh_SteppingStone")
+
+[node name="Stone4" type="MeshInstance3D" parent="ExteriorGrounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 0.03, -13.5)
+mesh = SubResource("Mesh_SteppingStone")
+
+[node name="Level_0_Ground" type="Node3D" parent="."]
+
+[node name="FloorLiving" type="StaticBody3D" parent="Level_0_Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -0.05, 3)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_0_Ground/FloorLiving"]
+mesh = SubResource("Mesh_Floor_10x6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_0_Ground/FloorLiving"]
+shape = SubResource("Shape_Floor_10x6")
+
+[node name="FloorKitchen" type="StaticBody3D" parent="Level_0_Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75, -0.05, -3)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_0_Ground/FloorKitchen"]
+mesh = SubResource("Mesh_Floor_7_5x6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_0_Ground/FloorKitchen"]
+shape = SubResource("Shape_Floor_7_5x6")
+
+[node name="FloorMudroom" type="StaticBody3D" parent="Level_0_Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, -0.05, -3)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_0_Ground/FloorMudroom"]
+mesh = SubResource("Mesh_Floor_2_5x6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_0_Ground/FloorMudroom"]
+shape = SubResource("Shape_Floor_2_5x6")
+
+[node name="FloorGarage" type="StaticBody3D" parent="Level_0_Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.05, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_0_Ground/FloorGarage"]
+mesh = SubResource("Mesh_Floor_Garage")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_0_Ground/FloorGarage"]
+shape = SubResource("Shape_Floor_Garage")
+
+[node name="WallNorthRearL" type="StaticBody3D" parent="Level_0_Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 1.35, -6)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_0_Ground/WallNorthRearL"]
+mesh = SubResource("Mesh_WallExt_8x2_7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_0_Ground/WallNorthRearL"]
+shape = SubResource("Shape_WallExt_8x2_7")
+
+[node name="WallNorthRearR" type="StaticBody3D" parent="Level_0_Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0, 1.35, -6)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_0_Ground/WallNorthRearR"]
+mesh = SubResource("Mesh_WallExt_3x2_7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_0_Ground/WallNorthRearR"]
+shape = SubResource("Shape_WallExt_3x2_7")
+
+[node name="RearSlidingDoors" type="Node3D" parent="Level_0_Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1.2, -6)
+
+[node name="GlassPanel1" type="MeshInstance3D" parent="Level_0_Ground/RearSlidingDoors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0, -0.02)
+mesh = SubResource("Mesh_SlidingGlassPanel")
+
+[node name="GlassPanel2" type="MeshInstance3D" parent="Level_0_Ground/RearSlidingDoors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46, 0, 0.02)
+mesh = SubResource("Mesh_SlidingGlassPanel")
+
+[node name="GlassPanel3" type="MeshInstance3D" parent="Level_0_Ground/RearSlidingDoors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46, 0, 0.02)
+mesh = SubResource("Mesh_SlidingGlassPanel")
+
+[node name="GlassPanel4" type="MeshInstance3D" parent="Level_0_Ground/RearSlidingDoors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 0, -0.02)
+mesh = SubResource("Mesh_SlidingGlassPanel")
+
+[node name="WallEast" type="StaticBody3D" parent="Level_0_Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 1.35, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_0_Ground/WallEast"]
+mesh = SubResource("Mesh_WallExt_12x2_7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_0_Ground/WallEast"]
+shape = SubResource("Shape_WallExt_12x2_7")
+
+[node name="WallWest" type="StaticBody3D" parent="Level_0_Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1.35, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_0_Ground/WallWest"]
+mesh = SubResource("Mesh_WallExt_12x2_7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_0_Ground/WallWest"]
+shape = SubResource("Shape_WallExt_12x2_7")
+
+[node name="WallSouthLiving" type="StaticBody3D" parent="Level_0_Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75, 1.35, 6)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_0_Ground/WallSouthLiving"]
+mesh = SubResource("Mesh_WallExt_8x2_7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_0_Ground/WallSouthLiving"]
+shape = SubResource("Shape_WallExt_8x2_7")
+
+[node name="WallSouthGarage" type="StaticBody3D" parent="Level_0_Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 1.35, 6)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_0_Ground/WallSouthGarage"]
+mesh = SubResource("Mesh_WallExt_8x2_7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_0_Ground/WallSouthGarage"]
+shape = SubResource("Shape_WallExt_8x2_7")
+
+[node name="WallGarageIntNorth" type="StaticBody3D" parent="Level_0_Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.35, -3.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_0_Ground/WallGarageIntNorth"]
+mesh = SubResource("Mesh_WallInt_5x2_7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_0_Ground/WallGarageIntNorth"]
+shape = SubResource("Shape_WallInt_5x2_7")
+
+[node name="WallGarageIntSouth" type="StaticBody3D" parent="Level_0_Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.35, 3.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_0_Ground/WallGarageIntSouth"]
+mesh = SubResource("Mesh_WallInt_5x2_7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_0_Ground/WallGarageIntSouth"]
+shape = SubResource("Shape_WallInt_5x2_7")
+
+[node name="ArchStubEast" type="StaticBody3D" parent="Level_0_Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 1.35, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_0_Ground/ArchStubEast"]
+mesh = SubResource("Mesh_WallInt_2x2_7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_0_Ground/ArchStubEast"]
+shape = SubResource("Shape_WallInt_2x2_7")
+
+[node name="ArchStubWest" type="StaticBody3D" parent="Level_0_Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.35, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_0_Ground/ArchStubWest"]
+mesh = SubResource("Mesh_WallInt_2x2_7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_0_Ground/ArchStubWest"]
+shape = SubResource("Shape_WallInt_2x2_7")
+
+[node name="ArchHeader" type="MeshInstance3D" parent="Level_0_Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0, 2.45, 0)
+mesh = SubResource("Mesh_ArchLintel")
+
+[node name="FrontDoor" parent="Level_0_Ground" instance=ExtResource("9_door")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 0, 6)
+edge_id = "door_front_dollhouse"
+
+[node name="GrandPiano" parent="Level_0_Ground" instance=ExtResource("10_piano")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 1.6, 0, -4.2)
+
+[node name="LivingRoomSuite" parent="Level_0_Ground" instance=ExtResource("11_sofa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, 0, 3.0)
+
+[node name="KitchenDining" parent="Level_0_Ground" instance=ExtResource("12_kitchen")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75, 0, -3.0)
+
+[node name="CraftsmanStaircase" parent="Level_0_Ground" instance=ExtResource("13_stairs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 0, 1.2)
+
+[node name="RecessedLightLiving" type="OmniLight3D" parent="Level_0_Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8, 2.6, 3)
+light_color = Color(1, 0.85, 0.65, 1)
+light_energy = 1.3
+omni_range = 7
+
+[node name="RecessedLightPiano" type="OmniLight3D" parent="Level_0_Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 2.6, -4.2)
+light_color = Color(1, 0.88, 0.7, 1)
+light_energy = 1.1
+omni_range = 6
+
+[node name="RecessedLightFoyer" type="OmniLight3D" parent="Level_0_Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 2.6, 4.2)
+light_color = Color(1, 0.88, 0.7, 1)
+light_energy = 1.1
+omni_range = 6
+
+[node name="Level_1_Upper" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
+
+[node name="FloorPrimarySuite" type="StaticBody3D" parent="Level_1_Upper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75, -0.05, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_1_Upper/FloorPrimarySuite"]
+mesh = SubResource("Mesh_Floor_10x6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_1_Upper/FloorPrimarySuite"]
+shape = SubResource("Shape_Floor_10x6")
+
+[node name="FloorBedroomsWest" type="StaticBody3D" parent="Level_1_Upper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.05, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_1_Upper/FloorBedroomsWest"]
+mesh = SubResource("Mesh_Floor_Garage")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_1_Upper/FloorBedroomsWest"]
+shape = SubResource("Shape_Floor_Garage")
+
+[node name="FloorHallway" type="StaticBody3D" parent="Level_1_Upper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, -0.05, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_1_Upper/FloorHallway"]
+mesh = SubResource("Mesh_Floor_2_5x6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_1_Upper/FloorHallway"]
+shape = SubResource("Shape_Floor_2_5x6")
+
+[node name="WallNorthL1" type="StaticBody3D" parent="Level_1_Upper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, -6)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_1_Upper/WallNorthL1"]
+mesh = SubResource("Mesh_WallExt_15x2_7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_1_Upper/WallNorthL1"]
+shape = SubResource("Shape_WallExt_15x2_7")
+
+[node name="WallSouthL1" type="StaticBody3D" parent="Level_1_Upper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 6)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_1_Upper/WallSouthL1"]
+mesh = SubResource("Mesh_WallExt_15x2_7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_1_Upper/WallSouthL1"]
+shape = SubResource("Shape_WallExt_15x2_7")
+
+[node name="WallEastL1" type="StaticBody3D" parent="Level_1_Upper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 1.35, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_1_Upper/WallEastL1"]
+mesh = SubResource("Mesh_WallExt_12x2_7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_1_Upper/WallEastL1"]
+shape = SubResource("Shape_WallExt_12x2_7")
+
+[node name="WallWestL1" type="StaticBody3D" parent="Level_1_Upper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1.35, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level_1_Upper/WallWestL1"]
+mesh = SubResource("Mesh_WallExt_12x2_7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_1_Upper/WallWestL1"]
+shape = SubResource("Shape_WallExt_12x2_7")
+
+[node name="PrimaryBedroomSuite" parent="Level_1_Upper" instance=ExtResource("14_bedroom")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75, 0, 2.5)
+
+[node name="SecondaryBedroom" parent="Level_1_Upper" instance=ExtResource("14_bedroom")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0, 0, 3.0)
+
+[node name="RecessedLightPrimary" type="OmniLight3D" parent="Level_1_Upper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75, 2.6, 2.5)
+light_color = Color(1, 0.88, 0.72, 1)
+light_energy = 1.2
+omni_range = 6
+
+[node name="RoofStructure" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+
+[node name="RoofPitchEast" type="MeshInstance3D" parent="RoofStructure"]
+transform = Transform3D(0.825829, -0.563921, 0, 0.563921, 0.825829, 0, 0, 0, 1, 3.6, 1.7, 0)
+mesh = SubResource("Mesh_RoofShingleEast")
+
+[node name="RoofPitchWest" type="MeshInstance3D" parent="RoofStructure"]
+transform = Transform3D(0.825829, 0.563921, 0, -0.563921, 0.825829, 0, 0, 0, 1, -3.6, 1.7, 0)
+mesh = SubResource("Mesh_RoofShingleWest")
+
+[node name="FrontGablePeak" type="MeshInstance3D" parent="RoofStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 5.9)
+mesh = SubResource("Mesh_GablePeak")
+
+[node name="TacticalPlayer" parent="." instance=ExtResource("15_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.2, 3.0)
+
+[node name="SunDirectionalLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.422618, -0.821394, 0.383022, 0, 0.422618, 0.906308, -0.906308, -0.383022, 0.178606, 22.65, 20.55, 10.56)
+light_color = Color(1, 0.96, 0.92, 1)
+light_energy = 4.5
+shadow_enabled = true
+shadow_bias = 0.005
+
+[node name="DollhouseCamera" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.40558, 0.579228, 0, 0.819152, 0.573576, -0.707107, -0.40558, 0.579228, 18, 22, 18)
+current = true
+fov = 40.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Env_Dollhouse")

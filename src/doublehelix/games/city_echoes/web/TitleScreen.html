@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Echoes 5.8: The Last Broadcast - Double Helix Tactical Edition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #020306;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: #f1f5f9;
+        }
+
+        #viewport {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        /* Fullscreen Cinematic Background Video */
+        #title-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 1;
+            opacity: 0.92;
+            filter: brightness(0.85) contrast(1.15) saturate(1.05);
+            transition: opacity 1.0s ease, filter 0.5s ease;
+            pointer-events: none;
+        }
+
+        /* Photorealistic High-Res Key Art Fallback */
+        #scene-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('assets/art/city_echoes_key_art.jpg'), url('CityEchoes.png');
+            background-size: cover;
+            background-position: center 38%;
+            filter: brightness(0.85) contrast(1.18);
+            z-index: 0;
+            transition: transform 12s cubic-bezier(0.1, 0.9, 0.2, 1);
+            transform: scale(1.03);
+        }
+        body:hover #scene-bg {
+            transform: scale(1.06);
+        }
+
+        /* Cinematic Anamorphic Letterbox Bars (2.39:1 Aspect Ratio) */
+        .anamorphic-bar {
+            position: fixed;
+            left: 0;
+            width: 100vw;
+            height: 6vh;
+            background: #000;
+            z-index: 20;
+            pointer-events: none;
+        }
+        #bar-top { top: 0; }
+        #bar-bottom { bottom: 0; }
+
+        /* Atmospheric Vignette & Subtle Film Grain */
+        #cinematic-vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0) 45%, rgba(2, 4, 8, 0.65) 75%, rgba(0, 0, 0, 0.92) 100%),
+                        linear-gradient(to top, rgba(2, 3, 7, 0.92) 0%, rgba(2, 3, 7, 0.15) 35%, transparent 60%);
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        /* Top Status Surveillance Header */
+        .top-deck {
+            position: absolute;
+            top: 7vh;
+            left: 3.5vw;
+            right: 3.5vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 15;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            color: #94a3b8;
+            pointer-events: auto;
+        }
+        .rec-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #f87171;
+            font-weight: bold;
+        }
+        .rec-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ef4444;
+            box-shadow: 0 0 10px #ef4444;
+            animation: pulseRec 1.4s infinite;
+        }
+        @keyframes pulseRec {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.85); }
+        }
+
+        .engine-badge {
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            padding: 5px 12px;
+            border-radius: 4px;
+            color: #38bdf8;
+            backdrop-filter: blur(8px);
+            font-size: 10px;
+            letter-spacing: 1.5px;
+        }
+
+        /* Bottom-Left Main Title & Interactive Menu */
+        .hero-section {
+            position: absolute;
+            bottom: 8vh;
+            left: 3.5vw;
+            z-index: 15;
+            max-width: 680px;
+            pointer-events: auto;
+        }
+
+        .hero-title {
+            font-size: 64px;
+            font-weight: 900;
+            letter-spacing: 6px;
+            line-height: 1.0;
+            color: #f8fafc;
+            text-shadow: 0 0 35px rgba(248, 250, 252, 0.35), 0 4px 12px rgba(0, 0, 0, 0.9);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 4px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .hero-subtitle::before {
+            content: '';
+            display: inline-block;
+            width: 24px;
+            height: 2px;
+            background: #f59e0b;
+        }
+
+        /* Modern Sleek Action Buttons */
+        .action-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .btn-primary-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.92) 0%, rgba(217, 119, 6, 0.95) 100%);
+            color: #0a0a0c;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 2px;
+            padding: 14px 28px;
+            border-radius: 4px;
+            border: 1px solid #fbbf24;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            transition: all 0.25s ease;
+            text-decoration: none;
+        }
+        .btn-primary-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 35px rgba(245, 158, 11, 0.65);
+            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+        }
+
+        .btn-intruder-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.92) 0%, rgba(153, 27, 27, 0.95) 100%);
+            color: #ffffff;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 2px;
+            padding: 14px 28px;
+            border-radius: 4px;
+            border: 1px solid #ef4444;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+            transition: all 0.25s ease;
+            text-decoration: none;
+        }
+        .btn-intruder-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 35px rgba(239, 68, 68, 0.75);
+            background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+        }
+
+        .btn-secondary-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(15, 23, 42, 0.75);
+            color: #cbd5e1;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            padding: 12px 20px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+        .btn-secondary-action:hover {
+            border-color: #38bdf8;
+            color: #ffffff;
+            box-shadow: 0 0 18px rgba(56, 189, 248, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Bottom-Right Proprietary Signature */
+        .bottom-right-deck {
+            position: absolute;
+            bottom: 8vh;
+            right: 3.5vw;
+            z-index: 15;
+            text-align: right;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 10px;
+            color: #64748b;
+            letter-spacing: 1px;
+            line-height: 1.6;
+            pointer-events: none;
+        }
+        .sig-corp {
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        .sig-invariants {
+            color: #22c55e;
+            font-weight: bold;
+        }
+
+        /* Audio Initialization Overlay (Unobtrusive Click to Sound) */
+        #audio-hint {
+            position: absolute;
+            bottom: 2vh;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 25;
+            font-size: 10px;
+            font-family: 'Consolas', monospace;
+            letter-spacing: 2px;
+            color: #94a3b8;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 4px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Modal for Blueprints */
+        .cinematic-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 4, 8, 0.94);
+            backdrop-filter: blur(16px);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        .cinematic-modal.open {
+            display: flex;
+        }
+        .modal-box {
+            position: relative;
+            max-width: 90vw;
+            max-height: 85vh;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            box-shadow: 0 0 50px rgba(56, 189, 248, 0.2);
+            border-radius: 6px;
+            overflow: hidden;
+            background: #000;
+        }
+        .modal-box img {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+            display: block;
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            padding: 6px 14px;
+            font-size: 12px;
+            font-family: inherit;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body onclick="initAudioContextOnUserClick()">
+
+<div id="viewport">
+    <!-- Photorealistic Key Art Fallback -->
+    <div id="scene-bg"></div>
+
+    <!-- Surveillance Video Background -->
+    <video id="title-video" autoplay loop muted playsinline preload="auto">
+        <source src="assets/videos/city_echoes.mp4" type="video/mp4">
+        <source src="assets/videos/startscreen.mp4" type="video/mp4">
+        <source src="city_echoes.mp4" type="video/mp4">
+    </video>
+
+    <!-- Cinematic Overlays -->
+    <div id="cinematic-vignette"></div>
+    <div id="bar-top" class="anamorphic-bar"></div>
+    <div id="bar-bottom" class="anamorphic-bar"></div>
+
+    <!-- Top Status Surveillance Deck -->
+    <div class="top-deck">
+        <div class="rec-indicator">
+            <span class="rec-dot"></span>
+            <span>LIVE OPERATIONAL SURVEILLANCE // DISTRICT 9 REFUGE</span>
+        </div>
+        <div class="engine-badge" id="storage-status-badge">
+            🧬 ARKADE.NEW-WORLD-ARKITECH.DEV // DOUBLE HELIX v2.4 // P(RUIN)=0.0000
+        </div>
+    </div>
+
+    <!-- Bottom-Left Title & Action Hub -->
+    <div class="hero-section">
+        <h1 class="hero-title">CITY ECHOES</h1>
+        <div class="hero-subtitle">THE LAST BROADCAST • TACTICAL HOME INVASION</div>
+
+        <div class="action-row">
+            <a href="Simulator3D.html?level=1&role=occupant" class="btn-primary-action nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                [1] PLAY AS OCCUPANT (DEFENDER)
+            </a>
+            <a href="Simulator3D.html?level=1&role=intruder" class="btn-intruder-action nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="22" y1="12" x2="18" y2="12"></line>
+                    <line x1="6" y1="12" x2="2" y2="12"></line>
+                    <line x1="12" y1="6" x2="12" y2="2"></line>
+                    <line x1="12" y1="22" x2="12" y2="18"></line>
+                </svg>
+                [T] PLAY AS INTRUDER (INFILTRATOR)
+            </a>
+            <a href="Simulator3D.html?level=2" class="btn-secondary-action nav-link">
+                [2] URBAN TENEMENT
+            </a>
+            <a href="Simulator3D.html?level=3" class="btn-secondary-action nav-link">
+                [3] SECTOR 7 BUNKER
+            </a>
+            <button onclick="openBlueprintModal('assets/art/blueprint_level1_colonial.jpg')" class="btn-secondary-action">
+                [M] BLUEPRINTS
+            </button>
+            <a href="AudioConsole.html" class="btn-secondary-action nav-link">
+                [A] ACOUSTIC RADAR
+            </a>
+        </div>
+    </div>
+
+    <!-- Bottom-Right Proprietary Attribution -->
+    <div class="bottom-right-deck">
+        <div class="sig-corp">Cosmic Souls of Sovereignty Inc. • arkade.new-world-arkitech.dev</div>
+        <div>Continuous Collision Detection • Remote Container & Offline Memory Bundles</div>
+        <div class="sig-invariants">Absorbing Barrier: INTACT • Sheaf Coherence: 98.5%</div>
+    </div>
+
+    <div id="audio-hint">[ CLICK ANYWHERE TO ENABLE CINEMATIC AUDIO ]</div>
+</div>
+
+<!-- Blueprint Inspection Modal -->
+<div id="bp-modal" class="cinematic-modal" onclick="closeBlueprintModal()">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <button class="modal-close-btn" onclick="closeBlueprintModal()">ESC // CLOSE</button>
+        <img id="bp-modal-img" src="assets/art/blueprint_level1_colonial.jpg" alt="Blueprint">
+    </div>
+</div>
+
+<script>
+    let audioStarted = false;
+    let audioCtx = null;
+
+    /**
+     * Storage Container resolution for arkade.new-world-arkitech.dev
+     * Precedence: window.ARKADE_STORAGE_CONTAINER -> URL param (?storage_url= / ?storage= / ?cdn=)
+     *            -> Hostname detection -> Default relative 'assets'
+     */
+    function getStorageBaseUrl() {
+        if (window.ARKADE_STORAGE_CONTAINER && typeof window.ARKADE_STORAGE_CONTAINER === 'string') {
+            return window.ARKADE_STORAGE_CONTAINER.replace(/\/+$/, '');
+        }
+        try {
+            const params = new URLSearchParams(window.location.search);
+            const override = params.get('storage_url') || params.get('storage') || params.get('cdn');
+            if (override) {
+                return override.replace(/\/+$/, '');
+            }
+            if (window.location.hostname === 'arkade.new-world-arkitech.dev') {
+                return 'https://arkade.new-world-arkitech.dev/assets';
+            }
+        } catch (e) {}
+        return 'assets';
+    }
+
+    function resolveAssetUrl(relPath) {
+        if (!relPath) return relPath;
+        if (relPath.startsWith('http://') || relPath.startsWith('https://') || relPath.startsWith('data:') || relPath.startsWith('blob:')) {
+            return relPath;
+        }
+        const cleanPath = relPath.replace(/^(\.\/|\/)+/, '');
+        const base = getStorageBaseUrl();
+        if (base === 'assets') {
+            return cleanPath.startsWith('assets/') ? cleanPath : 'assets/' + cleanPath;
+        }
+        const stripped = cleanPath.startsWith('assets/') ? cleanPath.substring(7) : cleanPath;
+        return `${base}/${stripped}`;
+    }
+
+    function appendStorageParams(targetUrl) {
+        try {
+            const currentParams = new URLSearchParams(window.location.search);
+            const storage = currentParams.get('storage_url') || currentParams.get('storage') || currentParams.get('cdn');
+            if (storage) {
+                const sep = targetUrl.includes('?') ? '&' : '?';
+                return `${targetUrl}${sep}storage_url=${encodeURIComponent(storage)}`;
+            }
+        } catch (e) {}
+        return targetUrl;
+    }
+
+    // Initialize asset paths and navigation parameter forwarding
+    document.addEventListener('DOMContentLoaded', () => {
+        const base = getStorageBaseUrl();
+        const badge = document.getElementById('storage-status-badge');
+        if (badge && base !== 'assets') {
+            badge.innerText = `🧬 ARKADE STORAGE // ${base.replace(/^https?:\/\//, '')} // DOUBLE HELIX v2.4`;
+        }
+
+        // Forward query params across action buttons
+        document.querySelectorAll('.nav-link').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href) {
+                link.setAttribute('href', appendStorageParams(href));
+            }
+        });
+
+        // Configure video sources with storage container resolution
+        const vid = document.getElementById('title-video');
+        if (vid) {
+            const containerSrc = resolveAssetUrl('assets/videos/city_echoes.mp4');
+            vid.innerHTML = `
+                <source src="${containerSrc}" type="video/mp4">
+                <source src="assets/videos/city_echoes.mp4" type="video/mp4">
+                <source src="assets/videos/startscreen.mp4" type="video/mp4">
+                <source src="city_echoes.mp4" type="video/mp4">
+            `;
+            vid.load();
+        }
+    });
+
+    function initAudioContextOnUserClick() {
+        if (audioStarted) return;
+        audioStarted = true;
+        
+        const hint = document.getElementById('audio-hint');
+        if (hint) hint.style.opacity = '0';
+
+        const vid = document.getElementById('title-video');
+        if (vid) {
+            vid.muted = false;
+            vid.volume = 0.65;
+            vid.play().catch(() => {});
+        }
+
+        try {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            createAmbientDrone(audioCtx);
+        } catch (e) {}
+    }
+
+    function createAmbientDrone(ctx) {
+        if (!ctx) return;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const filter = ctx.createBiquadFilter();
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(45, ctx.currentTime);
+
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(140, ctx.currentTime);
+
+        gain.gain.setValueAtTime(0.001, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.18, ctx.currentTime + 3.0);
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+    }
+
+    function openBlueprintModal(imgSrc) {
+        const modal = document.getElementById('bp-modal');
+        const img = document.getElementById('bp-modal-img');
+        if (img) img.src = resolveAssetUrl(imgSrc);
+        if (modal) modal.classList.add('open');
+    }
+
+    function closeBlueprintModal() {
+        const modal = document.getElementById('bp-modal');
+        if (modal) modal.classList.remove('open');
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (e.code === 'Digit1') window.location.href = appendStorageParams('Simulator3D.html?level=1&role=occupant');
+        if (e.code === 'KeyT') window.location.href = appendStorageParams('Simulator3D.html?level=1&role=intruder');
+        if (e.code === 'Digit2') window.location.href = appendStorageParams('Simulator3D.html?level=2');
+        if (e.code === 'Digit3') window.location.href = appendStorageParams('Simulator3D.html?level=3');
+        if (e.code === 'KeyM') openBlueprintModal('assets/art/blueprint_level1_colonial.jpg');
+        if (e.code === 'KeyA') window.location.href = appendStorageParams('AudioConsole.html');
+        if (e.code === 'Escape') closeBlueprintModal();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+[gd_scene format=3 uid="uid://bv83y1x64m0ap"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_CreamFabric"]
+albedo_color = Color(0.92, 0.9, 0.86, 1)
+roughness = 0.88
+metallic = 0.0
+
+[sub_resource type="StandardMaterial3D" id="Mat_PillowSage"]
+albedo_color = Color(0.55, 0.62, 0.54, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="Mat_PillowOchre"]
+albedo_color = Color(0.78, 0.65, 0.42, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="Mat_DarkWalnut"]
+albedo_color = Color(0.24, 0.16, 0.11, 1)
+roughness = 0.4
+metallic = 0.0
+
+[sub_resource type="StandardMaterial3D" id="Mat_AreaRug"]
+albedo_color = Color(0.85, 0.82, 0.77, 1)
+roughness = 0.95
+
+[sub_resource type="StandardMaterial3D" id="Mat_CeramicWhite"]
+albedo_color = Color(0.95, 0.95, 0.95, 1)
+roughness = 0.15
+clearcoat_enabled = true
+clearcoat = 0.6
+
+[sub_resource type="StandardMaterial3D" id="Mat_LampshadeWarm"]
+albedo_color = Color(0.98, 0.92, 0.8, 1)
+roughness = 0.8
+emission_enabled = true
+emission = Color(0.98, 0.86, 0.6, 1)
+emission_energy_multiplier = 0.6
+
+[sub_resource type="BoxMesh" id="Mesh_Rug"]
+material = SubResource("Mat_AreaRug")
+size = Vector3(4.2, 0.015, 3.2)
+
+[sub_resource type="BoxMesh" id="Mesh_SofaBase"]
+material = SubResource("Mat_CreamFabric")
+size = Vector3(2.3, 0.28, 0.92)
+
+[sub_resource type="BoxMesh" id="Mesh_SofaCushion"]
+material = SubResource("Mat_CreamFabric")
+size = Vector3(0.68, 0.14, 0.68)
+
+[sub_resource type="BoxMesh" id="Mesh_SofaBackrest"]
+material = SubResource("Mat_CreamFabric")
+size = Vector3(2.3, 0.48, 0.24)
+
+[sub_resource type="CylinderMesh" id="Mesh_SofaRolledArm"]
+material = SubResource("Mat_CreamFabric")
+top_radius = 0.12
+bottom_radius = 0.12
+height = 0.9
+
+[sub_resource type="BoxMesh" id="Mesh_AccentPillow"]
+material = SubResource("Mat_PillowSage")
+size = Vector3(0.38, 0.38, 0.14)
+
+[sub_resource type="BoxMesh" id="Mesh_AccentPillow2"]
+material = SubResource("Mat_PillowOchre")
+size = Vector3(0.36, 0.36, 0.14)
+
+[sub_resource type="BoxMesh" id="Mesh_ChairBase"]
+material = SubResource("Mat_CreamFabric")
+size = Vector3(1.0, 0.28, 0.9)
+
+[sub_resource type="BoxMesh" id="Mesh_ChairBackrest"]
+material = SubResource("Mat_CreamFabric")
+size = Vector3(1.0, 0.48, 0.22)
+
+[sub_resource type="CylinderMesh" id="Mesh_ChairArm"]
+material = SubResource("Mat_CreamFabric")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.88
+
+[sub_resource type="BoxMesh" id="Mesh_CoffeeTop"]
+material = SubResource("Mat_DarkWalnut")
+size = Vector3(1.35, 0.045, 0.75)
+
+[sub_resource type="BoxMesh" id="Mesh_CoffeeShelf"]
+material = SubResource("Mat_DarkWalnut")
+size = Vector3(1.25, 0.025, 0.65)
+
+[sub_resource type="CylinderMesh" id="Mesh_TableLeg"]
+material = SubResource("Mat_DarkWalnut")
+top_radius = 0.03
+bottom_radius = 0.02
+height = 0.42
+
+[sub_resource type="CylinderMesh" id="Mesh_Vase"]
+material = SubResource("Mat_CeramicWhite")
+top_radius = 0.06
+bottom_radius = 0.08
+height = 0.22
+
+[sub_resource type="BoxMesh" id="Mesh_EndTableTop"]
+material = SubResource("Mat_DarkWalnut")
+size = Vector3(0.55, 0.04, 0.55)
+
+[sub_resource type="CylinderMesh" id="Mesh_LampBase"]
+material = SubResource("Mat_DarkWalnut")
+top_radius = 0.08
+bottom_radius = 0.1
+height = 0.04
+
+[sub_resource type="CylinderMesh" id="Mesh_LampStem"]
+material = SubResource("Mat_DarkWalnut")
+top_radius = 0.015
+bottom_radius = 0.015
+height = 0.38
+
+[sub_resource type="CylinderMesh" id="Mesh_Lampshade"]
+material = SubResource("Mat_LampshadeWarm")
+top_radius = 0.14
+bottom_radius = 0.2
+height = 0.26
+
+[sub_resource type="BoxShape3D" id="Shape_Sofa"]
+size = Vector3(2.35, 0.85, 0.95)
+
+[sub_resource type="BoxShape3D" id="Shape_Chair"]
+size = Vector3(1.05, 0.85, 0.95)
+
+[sub_resource type="BoxShape3D" id="Shape_CoffeeTable"]
+size = Vector3(1.4, 0.46, 0.8)
+
+[sub_resource type="BoxShape3D" id="Shape_EndTable"]
+size = Vector3(0.6, 0.75, 0.6)
+
+[node name="CraftsmanSofaSuite" type="StaticBody3D"]
+
+[node name="AreaRug" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.008, 0)
+mesh = SubResource("Mesh_Rug")
+
+[node name="ColSofa" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42, -1.0)
+shape = SubResource("Shape_Sofa")
+
+[node name="ColChairRight" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 1.6, 0.42, 0.2)
+shape = SubResource("Shape_Chair")
+
+[node name="ColChairLeft" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -1.6, 0.42, 0.2)
+shape = SubResource("Shape_Chair")
+
+[node name="ColCoffeeTable" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23, 0)
+shape = SubResource("Shape_CoffeeTable")
+
+[node name="ColEndTable" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0.38, -1.1)
+shape = SubResource("Shape_EndTable")
+
+[node name="Sofa3Seater" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.0)
+
+[node name="Base" type="MeshInstance3D" parent="Sofa3Seater"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("Mesh_SofaBase")
+
+[node name="Backrest" type="MeshInstance3D" parent="Sofa3Seater"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.54, -0.32)
+mesh = SubResource("Mesh_SofaBackrest")
+
+[node name="Cushion1" type="MeshInstance3D" parent="Sofa3Seater"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.72, 0.38, 0.05)
+mesh = SubResource("Mesh_SofaCushion")
+
+[node name="Cushion2" type="MeshInstance3D" parent="Sofa3Seater"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, 0.05)
+mesh = SubResource("Mesh_SofaCushion")
+
+[node name="Cushion3" type="MeshInstance3D" parent="Sofa3Seater"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72, 0.38, 0.05)
+mesh = SubResource("Mesh_SofaCushion")
+
+[node name="ArmLeft" type="MeshInstance3D" parent="Sofa3Seater"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.1, 0.46, 0.02)
+mesh = SubResource("Mesh_SofaRolledArm")
+
+[node name="ArmRight" type="MeshInstance3D" parent="Sofa3Seater"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.1, 0.46, 0.02)
+mesh = SubResource("Mesh_SofaRolledArm")
+
+[node name="PillowLeft" type="MeshInstance3D" parent="Sofa3Seater"]
+transform = Transform3D(0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, -0.85, 0.48, -0.15)
+mesh = SubResource("Mesh_AccentPillow")
+
+[node name="PillowRight" type="MeshInstance3D" parent="Sofa3Seater"]
+transform = Transform3D(0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, 0.85, 0.48, -0.15)
+mesh = SubResource("Mesh_AccentPillow2")
+
+[node name="ArmchairRight" type="Node3D" parent="."]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 1.6, 0, 0.2)
+
+[node name="Base" type="MeshInstance3D" parent="ArmchairRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("Mesh_ChairBase")
+
+[node name="Backrest" type="MeshInstance3D" parent="ArmchairRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.54, -0.32)
+mesh = SubResource("Mesh_ChairBackrest")
+
+[node name="Cushion" type="MeshInstance3D" parent="ArmchairRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, 0.05)
+mesh = SubResource("Mesh_SofaCushion")
+
+[node name="ArmL" type="MeshInstance3D" parent="ArmchairRight"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.45, 0.44, 0.02)
+mesh = SubResource("Mesh_ChairArm")
+
+[node name="ArmR" type="MeshInstance3D" parent="ArmchairRight"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.45, 0.44, 0.02)
+mesh = SubResource("Mesh_ChairArm")
+
+[node name="ArmchairLeft" type="Node3D" parent="."]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -1.6, 0, 0.2)
+
+[node name="Base" type="MeshInstance3D" parent="ArmchairLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("Mesh_ChairBase")
+
+[node name="Backrest" type="MeshInstance3D" parent="ArmchairLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.54, -0.32)
+mesh = SubResource("Mesh_ChairBackrest")
+
+[node name="Cushion" type="MeshInstance3D" parent="ArmchairLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, 0.05)
+mesh = SubResource("Mesh_SofaCushion")
+
+[node name="ArmL" type="MeshInstance3D" parent="ArmchairLeft"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.45, 0.44, 0.02)
+mesh = SubResource("Mesh_ChairArm")
+
+[node name="ArmR" type="MeshInstance3D" parent="ArmchairLeft"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.45, 0.44, 0.02)
+mesh = SubResource("Mesh_ChairArm")
+
+[node name="CoffeeTable" type="Node3D" parent="."]
+
+[node name="Top" type="MeshInstance3D" parent="CoffeeTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44, 0)
+mesh = SubResource("Mesh_CoffeeTop")
+
+[node name="Shelf" type="MeshInstance3D" parent="CoffeeTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16, 0)
+mesh = SubResource("Mesh_CoffeeShelf")
+
+[node name="Leg1" type="MeshInstance3D" parent="CoffeeTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.22, -0.32)
+mesh = SubResource("Mesh_TableLeg")
+
+[node name="Leg2" type="MeshInstance3D" parent="CoffeeTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.22, -0.32)
+mesh = SubResource("Mesh_TableLeg")
+
+[node name="Leg3" type="MeshInstance3D" parent="CoffeeTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.22, 0.32)
+mesh = SubResource("Mesh_TableLeg")
+
+[node name="Leg4" type="MeshInstance3D" parent="CoffeeTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.22, 0.32)
+mesh = SubResource("Mesh_TableLeg")
+
+[node name="Vase" type="MeshInstance3D" parent="CoffeeTable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.57, 0)
+mesh = SubResource("Mesh_Vase")
+
+[node name="EndTableWithLamp" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0, -1.1)
+
+[node name="Top" type="MeshInstance3D" parent="EndTableWithLamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52, 0)
+mesh = SubResource("Mesh_EndTableTop")
+
+[node name="Leg1" type="MeshInstance3D" parent="EndTableWithLamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22, 0.26, -0.22)
+mesh = SubResource("Mesh_TableLeg")
+
+[node name="Leg2" type="MeshInstance3D" parent="EndTableWithLamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, 0.26, -0.22)
+mesh = SubResource("Mesh_TableLeg")
+
+[node name="Leg3" type="MeshInstance3D" parent="EndTableWithLamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22, 0.26, 0.22)
+mesh = SubResource("Mesh_TableLeg")
+
+[node name="Leg4" type="MeshInstance3D" parent="EndTableWithLamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, 0.26, 0.22)
+mesh = SubResource("Mesh_TableLeg")
+
+[node name="LampBase" type="MeshInstance3D" parent="EndTableWithLamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56, 0)
+mesh = SubResource("Mesh_LampBase")
+
+[node name="LampStem" type="MeshInstance3D" parent="EndTableWithLamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74, 0)
+mesh = SubResource("Mesh_LampStem")
+
+[node name="Lampshade" type="MeshInstance3D" parent="EndTableWithLamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.98, 0)
+mesh = SubResource("Mesh_Lampshade")
+
+[node name="WarmLight" type="OmniLight3D" parent="EndTableWithLamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.98, 0)
+light_color = Color(1, 0.88, 0.7, 1)
+light_energy = 0.85
+omni_range = 3.5

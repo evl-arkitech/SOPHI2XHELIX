@@ -1,0 +1,32 @@
+{
+  "name": "doublehelix-edge-server",
+  "version": "0.1.0",
+  "description": "Dedicated Cloudflare Edge Server for DoubleHelix Neural Agent Engine",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "build": "wrangler deploy --dry-run --outdir dist",
+    "tail": "wrangler tail"
+  },
+  "keywords": [
+    "cloudflare",
+    "cloudflare-workers",
+    "workers-ai",
+    "durable-objects",
+    "edge-computing",
+    "doublehelix",
+    "game-engine"
+  ],
+  "author": "DoubleHelix Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240320.0",
+    "typescript": "^5.4.0",
+    "wrangler": "^4.139.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true,
+    "workerd@1.20260923.1": true
+  }
+}

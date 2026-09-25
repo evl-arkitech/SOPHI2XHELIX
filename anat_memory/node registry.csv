@@ -1,0 +1,18 @@
+Node ID,Functional Name,Biological Counterpart,Synthetic Architecture,Update Regime,Representational Code
+N01_SCRATCH,Active Executive Scratchpad,dlPFC Microcircuits,Sliding-Window Attention + Fast-Weights,Token-level online,Dense continuous KV activations
+N02_GATE,Gating & Routing Arbiter,Striatal Basal Ganglia loops,Non-linear Gated Attention / MoE Router,Sub-step dynamic,Binary/sparse routing coefficients
+N03_SILENT,Activity-Silent State Buffer,Short-Term Synaptic Plasticity,Dynamic Linear RNN / Fast-Weight Cache,Token-level decay,Modulated connection weights
+N04_SEPARATE,High-Dimensional Separator,Dentate Gyrus Granule Cells,Sparse Encoders / Locality-Sensitive Hashing,Instantaneous,Ultra-sparse orthogonal vectors
+N05_ATTRACT,Continuous Energy Attractor,Hippocampal CA3 Collaterals,Continuous Modern Hopfield Network,Settling step (CCCP),Continuous fixed-point attractors
+N06_COMPARE,State Comparator Hub,Hippocampal CA1 Readout,Bidirectional Cross-Attention Verification,Inference-phase,Dot-product similarity metrics
+N07_GRAPH,Associative Relational Index,Medial Temporal Hippocampus,HippoRAG Knowledge Graph + PageRank,Event-driven insert,Entity nodes + relational triples
+N08_TITANS,Surprise-Gated Memory Core,Midbrain-PFC Plastic Core,Titans Neural Long-Term Memory,Test-time gradient,Dynamic neural parameter matrix
+N09_SURPRISE,Prediction Error Detector,VTA/SNc Dopamine System,Loss Gradient Evaluator,Token-level dynamic,Continuous surprise scalars
+N10_PARAM,Parametric Knowledge Mantle,Neocortical Deep Layers,Transformer Feedforward Parameters (MLP),Offline / Periodic,Dense static parameter weights
+N11_TRIPLE,Offline Replay Synchronizer,SWS Triple Coupling Oscillations,Generative Latent Replay Scheduler,Offline idle states,Reconstructed sequence batches
+N12_REGULAR,Metaplastic Synapse Guard,Synaptic Tagging & Capture,Elastic Weight Consolidation (EWC) / SI,Continual streaming,Per-weight Fisher/importance tensors
+N13_DESTAB,Labilization Engine,Ubiquitin-Proteasome System,GluN2B-style Scaffolding Cleavage,Error-triggered,Dynamic gradient mask / gate
+N14_SURGERY,Direct Factual Editor,Post-Retrieval Restabilization,ROME / MEMIT Low-Rank Solver,Targeted execution,Rank-one parameter update delta
+N15_HORROR_FRAMEWORK,Structural Horror & Psychological Runtime,Amygdala-Insular Tension Controller,Two-Tier Director/Stalker + Sanity Pipeline,Continuous Feedback & Director Tick,State Contracts + Dynamic Post-Processing
+N16_GRAPHICS_ARCHITECTURE,Real-Time Graphics & Shading Architecture,Visual Cortex (V1-V4) / Retinotopic Pipeline,Decoupled Visibility + Clustered Froxel + Cook-Torrance PBR + Temporal Jitter,Per-frame Render Graph Synchronous,RenderGraph DAG + Barycentric Visibility & Clustered Light Indices
+N17_DISTINCTION_ARCHITECTURE,Architecture of Distinction & Sensory Web Craft,Somatosensory & Prefrontal Aesthetics / Multimodal Motor-Sensory Integration,Kinetic Typography + Magnetic Affordances + Semantic Canvas Scaffold + Dynamic Biquad Audio,Continuous Input & Viewport Synchronous,Kinetic Interaction Contracts + Semantic AOM Scaffolding & Biquad Filter Coefficients

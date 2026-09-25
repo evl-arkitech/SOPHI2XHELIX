@@ -1,0 +1,235 @@
+[gd_scene format=3 uid="uid://dj1a04k8lq72m"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_WhiteCabinet"]
+albedo_color = Color(0.95, 0.95, 0.95, 1)
+roughness = 0.4
+metallic = 0.0
+
+[sub_resource type="StandardMaterial3D" id="Mat_WhiteQuartz"]
+albedo_color = Color(0.93, 0.93, 0.92, 1)
+roughness = 0.12
+clearcoat_enabled = true
+clearcoat = 0.8
+
+[sub_resource type="StandardMaterial3D" id="Mat_DarkWalnut"]
+albedo_color = Color(0.22, 0.15, 0.1, 1)
+roughness = 0.42
+
+[sub_resource type="StandardMaterial3D" id="Mat_Stainless"]
+albedo_color = Color(0.78, 0.79, 0.8, 1)
+metallic = 0.92
+roughness = 0.18
+
+[sub_resource type="StandardMaterial3D" id="Mat_BlackIron"]
+albedo_color = Color(0.12, 0.12, 0.12, 1)
+metallic = 0.7
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="Mat_CandleGlow"]
+albedo_color = Color(1, 0.92, 0.75, 1)
+emission_enabled = true
+emission = Color(1, 0.88, 0.65, 1)
+emission_energy_multiplier = 1.2
+
+[sub_resource type="BoxMesh" id="Mesh_DiningTop"]
+material = SubResource("Mat_DarkWalnut")
+size = Vector3(2.0, 0.06, 1.0)
+
+[sub_resource type="CylinderMesh" id="Mesh_DiningLeg"]
+material = SubResource("Mat_DarkWalnut")
+top_radius = 0.035
+bottom_radius = 0.025
+height = 0.73
+
+[sub_resource type="BoxMesh" id="Mesh_ChairSeat"]
+material = SubResource("Mat_DarkWalnut")
+size = Vector3(0.44, 0.04, 0.44)
+
+[sub_resource type="BoxMesh" id="Mesh_ChairBack"]
+material = SubResource("Mat_DarkWalnut")
+size = Vector3(0.44, 0.45, 0.03)
+
+[sub_resource type="CylinderMesh" id="Mesh_ChairLeg"]
+material = SubResource("Mat_DarkWalnut")
+top_radius = 0.02
+bottom_radius = 0.015
+height = 0.44
+
+[sub_resource type="BoxMesh" id="Mesh_IslandCabinet"]
+material = SubResource("Mat_WhiteCabinet")
+size = Vector3(2.2, 0.88, 0.9)
+
+[sub_resource type="BoxMesh" id="Mesh_IslandQuartzTop"]
+material = SubResource("Mat_WhiteQuartz")
+size = Vector3(2.35, 0.05, 1.1)
+
+[sub_resource type="BoxMesh" id="Mesh_WallCabinets"]
+material = SubResource("Mat_WhiteCabinet")
+size = Vector3(3.2, 0.88, 0.65)
+
+[sub_resource type="BoxMesh" id="Mesh_UpperCabinets"]
+material = SubResource("Mat_WhiteCabinet")
+size = Vector3(3.2, 0.75, 0.35)
+
+[sub_resource type="BoxMesh" id="Mesh_StainlessRange"]
+material = SubResource("Mat_Stainless")
+size = Vector3(0.76, 0.9, 0.68)
+
+[sub_resource type="BoxMesh" id="Mesh_RangeHood"]
+material = SubResource("Mat_Stainless")
+size = Vector3(0.76, 0.6, 0.45)
+
+[sub_resource type="BoxMesh" id="Mesh_ChandelierRing"]
+material = SubResource("Mat_BlackIron")
+size = Vector3(0.8, 0.03, 0.8)
+
+[sub_resource type="CylinderMesh" id="Mesh_CandleBulb"]
+material = SubResource("Mat_CandleGlow")
+top_radius = 0.015
+bottom_radius = 0.015
+height = 0.08
+
+[sub_resource type="BoxShape3D" id="Shape_DiningTable"]
+size = Vector3(2.1, 0.8, 1.6)
+
+[sub_resource type="BoxShape3D" id="Shape_Island"]
+size = Vector3(2.4, 0.95, 1.15)
+
+[sub_resource type="BoxShape3D" id="Shape_CounterWall"]
+size = Vector3(3.25, 0.95, 0.7)
+
+[node name="CraftsmanKitchenDining" type="StaticBody3D"]
+
+[node name="ColDining" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.4, 0)
+shape = SubResource("Shape_DiningTable")
+
+[node name="ColIsland" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0.47, 0)
+shape = SubResource("Shape_Island")
+
+[node name="ColCounter" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0.47, -2.1)
+shape = SubResource("Shape_CounterWall")
+
+[node name="DiningArea" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0, 0)
+
+[node name="TableTop" type="MeshInstance3D" parent="DiningArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74, 0)
+mesh = SubResource("Mesh_DiningTop")
+
+[node name="Leg1" type="MeshInstance3D" parent="DiningArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 0.365, -0.4)
+mesh = SubResource("Mesh_DiningLeg")
+
+[node name="Leg2" type="MeshInstance3D" parent="DiningArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0.365, -0.4)
+mesh = SubResource("Mesh_DiningLeg")
+
+[node name="Leg3" type="MeshInstance3D" parent="DiningArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 0.365, 0.4)
+mesh = SubResource("Mesh_DiningLeg")
+
+[node name="Leg4" type="MeshInstance3D" parent="DiningArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0.365, 0.4)
+mesh = SubResource("Mesh_DiningLeg")
+
+[node name="ChairN1" type="Node3D" parent="DiningArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.6)
+
+[node name="Seat" type="MeshInstance3D" parent="DiningArea/ChairN1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+mesh = SubResource("Mesh_ChairSeat")
+
+[node name="Back" type="MeshInstance3D" parent="DiningArea/ChairN1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68, -0.2)
+mesh = SubResource("Mesh_ChairBack")
+
+[node name="ChairN2" type="Node3D" parent="DiningArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.6)
+
+[node name="Seat" type="MeshInstance3D" parent="DiningArea/ChairN2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+mesh = SubResource("Mesh_ChairSeat")
+
+[node name="Back" type="MeshInstance3D" parent="DiningArea/ChairN2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68, -0.2)
+mesh = SubResource("Mesh_ChairBack")
+
+[node name="ChairS1" type="Node3D" parent="DiningArea"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -0.5, 0, 0.6)
+
+[node name="Seat" type="MeshInstance3D" parent="DiningArea/ChairS1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+mesh = SubResource("Mesh_ChairSeat")
+
+[node name="Back" type="MeshInstance3D" parent="DiningArea/ChairS1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68, -0.2)
+mesh = SubResource("Mesh_ChairBack")
+
+[node name="ChairS2" type="Node3D" parent="DiningArea"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0.5, 0, 0.6)
+
+[node name="Seat" type="MeshInstance3D" parent="DiningArea/ChairS2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+mesh = SubResource("Mesh_ChairSeat")
+
+[node name="Back" type="MeshInstance3D" parent="DiningArea/ChairS2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68, -0.2)
+mesh = SubResource("Mesh_ChairBack")
+
+[node name="Chandelier" type="Node3D" parent="DiningArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.05, 0)
+
+[node name="Ring" type="MeshInstance3D" parent="DiningArea/Chandelier"]
+mesh = SubResource("Mesh_ChandelierRing")
+
+[node name="Candle1" type="MeshInstance3D" parent="DiningArea/Chandelier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32, 0.05, -0.32)
+mesh = SubResource("Mesh_CandleBulb")
+
+[node name="Candle2" type="MeshInstance3D" parent="DiningArea/Chandelier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32, 0.05, -0.32)
+mesh = SubResource("Mesh_CandleBulb")
+
+[node name="Candle3" type="MeshInstance3D" parent="DiningArea/Chandelier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32, 0.05, 0.32)
+mesh = SubResource("Mesh_CandleBulb")
+
+[node name="Candle4" type="MeshInstance3D" parent="DiningArea/Chandelier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32, 0.05, 0.32)
+mesh = SubResource("Mesh_CandleBulb")
+
+[node name="ChandelierLight" type="OmniLight3D" parent="DiningArea/Chandelier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+light_color = Color(1, 0.88, 0.65, 1)
+light_energy = 1.1
+omni_range = 4.5
+
+[node name="KitchenArea" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0, 0)
+
+[node name="IslandCabinet" type="MeshInstance3D" parent="KitchenArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44, 0)
+mesh = SubResource("Mesh_IslandCabinet")
+
+[node name="IslandQuartz" type="MeshInstance3D" parent="KitchenArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.905, 0)
+mesh = SubResource("Mesh_IslandQuartzTop")
+
+[node name="BackWallCabinets" type="MeshInstance3D" parent="KitchenArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44, -2.1)
+mesh = SubResource("Mesh_WallCabinets")
+
+[node name="BackWallUpper" type="MeshInstance3D" parent="KitchenArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.85, -2.25)
+mesh = SubResource("Mesh_UpperCabinets")
+
+[node name="StainlessOven" type="MeshInstance3D" parent="KitchenArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -2.08)
+mesh = SubResource("Mesh_StainlessRange")
+
+[node name="RangeHood" type="MeshInstance3D" parent="KitchenArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.85, -2.15)
+mesh = SubResource("Mesh_RangeHood")

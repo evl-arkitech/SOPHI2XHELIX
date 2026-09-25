@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://b2vbjv0xakqrh"]
+
+[ext_resource type="Script" uid="uid://c5rau36st1o6c" path="res://scripts/tactical_cctv_monitor.gd" id="1_cctv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frame"]
+albedo_color = Color(0.08, 0.09, 0.1, 1)
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_frame"]
+material = SubResource("StandardMaterial3D_frame")
+size = Vector3(0.8, 0.55, 0.08)
+
+[sub_resource type="QuadMesh" id="QuadMesh_screen"]
+size = Vector2(0.72, 0.46)
+
+[node name="TacticalCCTVMonitor" type="Node3D" unique_id=762181916]
+script = ExtResource("1_cctv")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=642063262]
+size = Vector2i(512, 384)
+render_target_update_mode = 3
+
+[node name="FrameMesh" type="MeshInstance3D" parent="." unique_id=73059810]
+mesh = SubResource("BoxMesh_frame")
+
+[node name="ScreenMesh" type="MeshInstance3D" parent="." unique_id=733884828]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.045)
+mesh = SubResource("QuadMesh_screen")

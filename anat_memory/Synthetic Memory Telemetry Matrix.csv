@@ -1,0 +1,8 @@
+Telemetry Variable,Target Node,Monitored Metric,Operational Target / Range,Remediation Dynamic
+attn_context_load,N01_SCRATCH,Active token utilization,Less than 80% capacity,Offload stale context tokens to N03_SILENT
+gate_open_rate,N02_GATE,Percentage of disinhibited tokens,5% to 15% of stream,Adjust striatal sensitivity threshold
+energy_delta,N05_ATTRACT,Modern Hopfield convergence,Less than 10^-5 in 2 steps,Raise inverse temperature beta
+ppr_entropy,N07_GRAPH,Stationary probability dispersion,Flat distribution warning,Re-prune generic entity stopwords
+surprise_magnitude,N09_SURPRISE,Reconstruction loss gradient norm,0.05 to 0.40 nominal,Trigger N08_TITANS write when exceeding 0.60
+drift_divergence,N10_PARAM,KL divergence from teacher network,D_KL less than 0.02,Increase consolidation penalty lambda
+edit_neighborhood_error,N14_SURGERY,Performance shift on adjacent entities,Zero variance allowed,Regularize covariance matrix C

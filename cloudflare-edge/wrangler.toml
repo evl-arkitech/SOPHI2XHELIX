@@ -1,0 +1,46 @@
+name = "doublehelix-edge-server"
+main = "src/index.ts"
+compatibility_date = "2024-03-20"
+compatibility_flags = ["nodejs_compat"]
+
+# Cloudflare Workers AI Binding (Global Edge Inference)
+[ai]
+binding = "AI"
+
+# Durable Objects for Real-Time Helix State Synchronization
+[durable_objects]
+bindings = [
+  { name = "HELIX_SYNCHRONIZER", class_name = "HelixStateSynchronizer" }
+]
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["HelixStateSynchronizer"]
+
+# KV Namespace for Global Edge Caching (Code revisions, contracts, ANAT graph)
+[[kv_namespaces]]
+binding = "DOUBLEHELIX_KV"
+id = "d46bd1c371d04f6ba220b63c2e01213b"
+
+# Environment Variables
+[vars]
+ENVIRONMENT = "production"
+ENABLE_EDGE_AI = "true"
+REASONING_MODEL = "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b"
+CODING_MODEL = "@cf/qwen/qwen2.5-coder-32b-instruct"
+DEFAULT_FRAME_BUDGET_MS = "16.6667"
+ANAT_MEMORY_SECTORS = "EX,EP,TT,PR,ED"
+
+# ...
+[observability.logs]
+enabled = false
+head_sampling_rate = 1
+invocation_logs = true
+persist = true
+
+[observability.traces]
+enabled = true
+head_sampling_rate = 1
+persist = true
+# ...
+
